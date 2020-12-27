@@ -1,0 +1,16 @@
+export const CART_CHECKOUT_METADATA = {
+  card: 'card',
+  cardName: 'cardName',
+  cardNumber: 'cardNumber',
+  expiration: 'expiration',
+  cvc: 'cvc',
+  email: 'email',
+  phone: 'phone',
+  vehicleId:'vehicleId',
+  addLater: 'addLater',
+  vehicleInfo: 'vehicleInfo',
+  licenseNumber: 'licenseNumber',
+  vehicleMake: 'vehicleMake',
+  vehicleModel: 'vehicleModel',
+  vehicleColor: 'vehicleColor',
+};

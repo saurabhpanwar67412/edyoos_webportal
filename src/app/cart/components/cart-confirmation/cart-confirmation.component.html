@@ -1,0 +1,192 @@
+<div *ngIf="isSpinner">
+    <app-nav-bar></app-nav-bar>
+    <div style="background-color: #e9ecef;" class="mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="fl100 order-con-container">
+                        <div class="fl100 order-conpghdr">Thank You For Your Order!</div>
+                        <div class="fl100 orcon-nlg">
+                            <div class="orcon-wnt">
+                                <label class="orcon-wntlbl1">Dear {{name}},</label>
+                                <label class="orcon-wntlbl2">Your Order Has Been Received</label>
+                            </div>
+                            <div class="orcon-logo">
+                                <img src="assets/images/edyoos-logo.svg" alt="" style="width: 90px;" />
+                            </div>
+                        </div>
+                        <div class="fl100 orcon-dlist">
+                            <ul>
+                                <li>
+                                    <label class="orcon-lbl">Invoice Number</label>
+                                    <label class="orcon-bfig">{{invoiceNumber | uppercase}}</label>
+                                </li>
+                                <li>
+                                    <label class="orcon-lbl">Booking Date</label>
+                                    <label class="orcon-bfig">{{myDate | date:'medium'}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="fl100 orcon-bkinfo">
+                            <div class="fl100 orcon-bkinfohdr">Booking Information</div>
+                            <div class="fl100 orconreplist" *ngFor="let propertyGroup of orderDetails">
+                                <div class="orcon-bkimg">
+                                    <img *ngIf="getImage(propertyGroup)" alt="parking image" id="plan" [src]="getImage(propertyGroup)">
+                                    <img *ngIf="!getImage(propertyGroup)" src="./assets/images/parking-carr.svg">
+                                </div>
+                                <div class="orcon-bkinfodesc">
+                                    <div class="orcon-bkinfoname">
+                                        <span tooltip="{{propertyGroup.parkingPlace}}">{{commonService.stringSlicer( propertyGroup.parkingPlace, 30)}}</span>
+                                        <span class="orcon-sprice">{{propertyGroup?.propertyGroupAmount | currency}}</span>
+                                    </div>
+                                    <div class="fl100 orcon-adbr">
+                                        <div class="orcon-bkinfoadrs">{{propertyGroup.address}}</div>
+                                    <div class="orcon-bkqr">
+                                        <ngx-barcode  [bc-value]="barcodevalue" [bc-display-value]="true" [bc-format]="format" [bc-line-color]="lineColor"
+                                        [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue" [bc-font-options]="fontOptions" [bc-font]="font"
+                                        [bc-text-align]="textAlign" [bc-text-position]="textPosition" [bc-text-margin]="textMargin" [bc-font-size]="fontSize" [bc-background]="background"
+                                        [bc-margin]="margin" [bc-margin-top]="marginTop" [bc-margin-bottom]="marginBottom" [bc-margin-left]="marginLeft" [bc-margin-right]="marginRight"></ngx-barcode>
+                                            </div>
+                                    </div>
+                                    <a id="viewbarcode" style="font-size: 14px;display:none;" class="btn-link" (click)="loginclick(mymodal)" >
+                                        View Barcode</a>
+                                    <div class="orcon-bktime">
+                                        <ul>
+                                            <li>
+                                                <label class="orcon-bktimelbl">Check-In Date & Time</label>
+                                                <label class="orcon-bktimefig">{{propertyGroup?.fromDate | date:'medium'}}</label>
+                                            </li>
+                                            <li class="orcon-bktime-divider"></li>
+                                            <li>
+                                                <label class="orcon-bktimelbl">Check-Out Date & Time</label>
+                                                <label class="orcon-bktimefig">{{propertyGroup?.toDate | date:'medium'}}</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl100 orcon-fsum">
+                            <div class="fl100 orcon-fsumhdr">Fare Summary</div>
+                            <div class="fl100 orcon-fsuminfo">
+                                <div class="orcon-qrcode">
+                                    
+                                </div>
+                                <div class="orcon-fsumlist">
+                                    <ul>
+                                        <li *ngIf="additionalFee>0">
+                                            <label class="orcon-fsumlbl">Tax & Other Service charges</label>
+                                            <label class="orcon-fsumfig"><span class="orcon-fsumcurr">USD</span> {{ additionalFee | currency}}</label>
+                                        </li>
+                                        <li *ngIf="additionalFee==0">
+                                            <label class="orcon-fsumlbl">Tax & Other Service charges</label>
+                                            <label class="orcon-fsumfig"><span class="orcon-fsumcurr">USD</span> 0.00</label>
+                                        </li>
+                                        <li class="orcon-fsumttl">
+                                            <label class="orcon-fsumlbl">Total Amount</label>
+                                            <label class="orcon-fsumfig"><span class="orcon-fsumcurr">USD</span> {{ totalAmount | currency}}</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl100 orcon-qury">
+                            <p>If you have any qustions about your order,<br/>
+                                send us an email at <a href="mailto:support@edyoos.com" class="fcblue">support@edyoos.com</a> & our team will get back to you ASAP!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container d-none">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="order-con-dv ">
+
+                        <main>
+
+
+                            
+                                        <span *ngIf="orderDetails && orderDetails.length > 1">
+                                            Items ({{orderDetails && orderDetails.length}})
+                                        </span>
+                                        <span *ngIf="orderDetails && orderDetails.length < 1">
+                                            Item
+                                        </span>
+                                <div *ngFor="let propertyGroup of orderDetails" class="row mb-5 no-gutters align-items-center">
+
+                                    
+                                                <a target="_blank" style="font-size: 14px;" class="btn-link"
+                                                    href="https://www.google.com/maps/dir/{{currentAdd}}/{{propertyGroup.address}}">
+                                                    <img src="./assets/images/redo.svg" style="width: 20px;">
+                                                    Get Directions</a>
+                                        
+                                    
+                                </div>
+                                
+                            
+
+                            <section *ngIf="additionalFee>0">
+                                               
+                            </section>
+
+                    <section>
+                        <hr />
+                        <div class="row mt-3 mb-0 mx-0">
+                            <div class="col-7">&nbsp;<ngx-barcode  [bc-value]="barcodevalue" [bc-display-value]="true" [bc-format]="format" 
+                                [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue" [bc-font-options]="fontOptions" [bc-font]="font"
+                                [bc-text-align]="textAlign" [bc-text-position]="textPosition" [bc-text-margin]="textMargin" [bc-font-size]="fontSize" [bc-background]="background"
+                                [bc-margin]="margin" [bc-margin-top]="marginTop" [bc-margin-bottom]="marginBottom" [bc-margin-left]="marginLeft" [bc-margin-right]="marginRight"></ngx-barcode></div>
+                            <div class="col-5 pr-0">
+                                <div class="row no-gutters align-items-center">
+                                    <h4 class="col h4 text-uppercase font-weight-bold">Total Amount</h4>
+                                    <h4 class="col-auto ml-left color-orange font-weight-bold">
+                                        {{ totalAmount | currency}}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+               
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="">
+        <app-footer></app-footer>
+    </div>
+
+</div>
+<div class="text-center col-md-12 col-lg-12 mt-5" *ngIf="!isSpinner">
+    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;margin-top: 10rem" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Barcode Scanner</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    <div class="modal-body">
+      
+    <div *ngFor="let propertyGroup of orderDetails">
+        <ngx-barcode  bc-value="{{propertyGroup?.toDate | date:'yMdhmmssa'}}" [bc-display-value]="true" [bc-format]="format" [bc-line-color]="lineColor"
+        [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue" [bc-font-options]="fontOptions" [bc-font]="font"
+        [bc-text-align]="textAlign" [bc-text-position]="textPosition" [bc-text-margin]="textMargin" [bc-font-size]="fontSize" [bc-background]="background"
+        [bc-margin]="margin" [bc-margin-top]="marginTop" [bc-margin-bottom]="marginBottom" [bc-margin-left]="marginLeft" [bc-margin-right]="marginRight"></ngx-barcode>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+      </div>
+  
+    </div>
+
+</ng-template>

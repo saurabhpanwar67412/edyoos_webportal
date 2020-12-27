@@ -1,0 +1,75 @@
+.order-container {
+  padding: 0.75rem;
+  border: 1px solid #94949477;
+  border-radius: 8px;
+}
+.order-container legend {
+  font-size: 1.75rem;
+  width: unset;
+}
+.order-container div {
+  padding: 0rem;
+}
+.order-container h3 {
+  font-size: 1.25rem;
+  color: #253446;
+  font-weight: 400;
+}
+
+.order-details img {
+  width: 100%;
+  background-color: #8194a3;
+}
+.order-details p {
+  color: #8194a3;
+  font-size: 1rem;
+  margin: 0rem;
+}
+.order-check {
+  text-align: right;
+}
+
+.cart-total {
+  margin: 0px;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+.cart-total p {
+  display: inline;
+  font-size: 1.25rem;
+  color: #253446;
+  flex: 0 0 66.666%;
+  max-width: 66.666%;
+}
+.cart-total span {
+  text-align: right;
+  font-size: 1.25rem;
+  color: #253446;
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+}
+.item-container {
+  position: relative;
+  border-bottom: 1px solid #94949477 !important;
+  margin-bottom: 0.5rem;
+}
+.item-container:last-child {
+  border-bottom: 0px solid #94949477 !important;
+  margin-bottom: 0rem;
+}
+.remove-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 8px;
+  border: 2px solid #d4d4d4;
+  background-color: #d4d4d4;
+  color: #111111;
+  padding: 0.2rem 0.75rem;
+  transition: 0.5s;
+}
+.remove-btn:hover {
+  border: 2px solid red;
+  background-color: red;
+  color: white;
+}

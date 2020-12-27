@@ -1,0 +1,162 @@
+<div class="mt-3">
+    <div class="row no-gutters">
+        <!-- <div class="offset-1 d-md-block d-none">&nbsp;</div> -->
+        <div class="col-xl-8 col-lg-10 col-12 pl-md-5 px-lg-0 px-md-2 ">
+            <div class="container-fluid px-md-2 pl-1 pr-2" style="overflow: hidden;">
+                <div class="row no-gutters mb-3" *ngIf="listOfCardDetails.length<=5">
+                    <div class="col-md-12 pl-0">
+                        <div *ngIf="!addNewCard" class="col-md-8 col-12 pl-0 ml-0" style="cursor: pointer;">
+                            <span (click)="addNewCardBtn()">
+                                <span style="font-size: 16pxk;">+</span> <img src="./assets/images/VISA.png"
+                                    style="width: 2.5rem;" class="mr-1" />
+                                <span class="pl-0 btn btn-link font-weight-bold"><span></span>Add
+                                    New Credit/Debit Card</span>
+                            </span>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-8">
+                                <hr class="my-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-gutters mt-2 pl-md-3 pl-1" [hidden]="!addNewCard">
+                    <div class="col-md-10 col-12">
+                        <form [formGroup]="paymentForm" (ngSubmit)="addCardSetup()">
+                            <div class="row">
+                                <div class="col-lg-5 col-sm-7 col-10 form-group">
+                                    <input type="text" id="card-name" formControlName="cardName" style="min-height: 43px;" class="form-control py-2"
+                                        aria-describedby="cardname" placeholder="Card Name">
+                                </div>
+                                <div class="col-lg-5 col-sm-7 col-10 form-group mb-0">
+                                    <div id="card-element" class="border-style" #cardElement>
+                                    </div>
+                                    <p id="card-error" role="alert" class="text-danger">{{cardErrors}}</p>
+                                </div>
+                                <div class="col-sm-10 col-10 mb-2 text-right">
+                                    <div class="text-right w-100 pt-md-2">
+                                        <button type="submit" mat-button class="text-light bg-primary mr-2"
+                                            [disabled]="paymentForm.invalid || isValidCard">AddCard</button>
+                                        <button type="button" mat-raised-button color="warn"
+                                            (click)="addNewCard = false">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row pl-3" *ngIf="listOfCardDetails.length>0">
+                    <div class="col-md-8 row no-gutters">
+                        <div class="col-md-9 col-9 pl-0">
+                            <h2 class="h2 pl-0">Your saved credit and debit cards</h2>
+                        </div>
+                        <!-- <div class="col-md-3">
+                            <strong class="h5 pl-1">Name on Card</strong>
+                        </div> -->
+                        <div class="col-auto d-md-block d-none">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-2 col-3">
+                            <h2 class="h2 pl-0">Expires</h2>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <hr class="my-0" />
+                    </div>
+                    <div class="col-md-8 px-0 pt-3">
+                        <mat-accordion class="example-headers-align">
+                            <mat-expansion-panel class=" mat-header-bg-color border"
+                                *ngFor="let card of listOfCardDetails;let i=index;let first = first;let last = last;"
+                                [expanded]="step === i" (opened)="setStep(i)">
+                                <mat-expansion-panel-header class="text-center row mat-bg-color">
+                                    <mat-panel-title class="col-md-7 d-md-flex d-block">
+                                        <img [src]="getImage(card.brand)" class="payment-card-img" alt="Visa logo">
+                                        <p class="mb-0">
+                                            <span class="text-capitalize">{{card.brand}} </span>
+                                            <span *ngIf="card.brand=='visa'">Card</span> ending in {{card.last4}}
+                                        </p>
+                                    </mat-panel-title>
+                                    <mat-panel-description class="col-md-4 text-center text-dark">
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <span class="pt-md-0 pt-3 ex-date">
+                                            {{card.cardUpdate.expMonth}}/{{card.cardUpdate.expYear}}</span>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <hr class="mt-0 mb-2" />
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-3">
+                                        <strong>Name on Card</strong>
+                                    </div>
+                                    <div class="col-md-4 col-2 d-md-block d-none text-right">
+                                        <strong> &nbsp;</strong>
+                                    </div>
+                                    <div class="col-md-5 col-5 ml-auto text-md-center">
+                                        <strong> <span class="d-md-inline-block d-none">&nbsp; &nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span> Billing
+                                            Address</strong>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters">
+                                    <div class="col-3">
+                                        {{card.billingDetailsUpdate.name}}
+                                    </div>
+                                    <div class="col-md-6 d-md-block d-none text-right">
+                                        <!-- <div>Email: Test@mail.cpm{{card.billingDetailsUpdate.email}} </div>
+                                        <div>Phone: Test@mail.cpm{{card.billingDetailsUpdate.phone}} </div> -->
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-3 ml-md-0 ml-auto pl-2">
+                                        <address class="mb-0">
+                                            <strong>{{card.billingDetailsUpdate.name}}</strong>
+                                            <br *ngIf="card.billingDetailsUpdate.name">
+
+                                            {{card.billingDetailsUpdate.addressUpdate.line1}}
+                                            <br *ngIf="card?.billingDetailsUpdate?.addressUpdate?.line1">
+
+                                            {{card.billingDetailsUpdate.addressUpdate.line2}}
+
+                                            <br *ngIf="card?.billingDetailsUpdate?.addressUpdate?.line2">
+
+                                            {{card.billingDetailsUpdate.addressUpdate.city}}
+
+                                            <strong *ngIf="card?.billingDetailsUpdate?.addressUpdate?.state &&
+                                            card.billingDetailsUpdate.addressUpdate.city ||
+                                            card?.billingDetailsUpdate?.addressUpdate?.city &&
+                                            card.billingDetailsUpdate.addressUpdate.postalCode
+                                            ">,</strong>
+
+                                            {{card.billingDetailsUpdate.addressUpdate.state}}
+                                            <strong *ngIf="card?.billingDetailsUpdate?.addressUpdate?.postalCode &&
+                                        card?.billingDetailsUpdate?.addressUpdate?.state">,</strong>
+
+                                            {{card.billingDetailsUpdate.addressUpdate.postalCode}}<br
+                                                *ngIf="card?.billingDetailsUpdate?.addressUpdate?.postalCode">
+                                        </address>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="col-12 text-right">
+                                            <div class="pt-1">
+                                                <button mat-raised-button color="warn"
+                                                    (click)="removeCardDetails(card.cardId)">Remove</button>
+                                                <button mat-raised-button color="" class="text-light bg-primary ml-2"
+                                                    (click)="openDialog(i)">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <mat-action-row class="py-1">
+                                    <button mat-button color="warn" *ngIf="!first"
+                                        (click)="prevStep()">Previous</button>
+                                    <button mat-button color="primary" *ngIf="!last" (click)="nextStep()">Next</button>
+                                    <button mat-button color="primary" *ngIf="last" (click)="nextStep()">End</button>
+                                </mat-action-row>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

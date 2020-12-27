@@ -1,0 +1,41 @@
+.email-us-container{
+    text-align: center;
+    background-color: #f2f2f2;
+}
+.email-us-container h3 {
+    margin: 0px;
+    display: inline-block;
+}
+.email-us-container input,
+.email-us-container textarea{
+    border-radius: 2rem;
+    border: 1px solid #8194a3;
+}
+.email-us-container input:focus,
+.email-us-container textarea:focus{
+outline: 0px;
+}
+.email-us-container textarea{
+    min-height: 8rem;
+    overflow: hidden;
+    resize: none;
+}
+.submit-btn {
+    border-radius: 2rem;
+    border: 2px solid #3489eb;
+    background-color: #3489eb;
+    color: #f4f4f4;
+    padding: 0.2rem 0.75rem;
+    transition: 0.5s;
+  }
+  .submit-btn:hover {
+    border: 2px solid #3489eb;
+    background-color: #f4f4f4;
+    color: #3489eb;
+  }
+  .submit-btn:disabled {
+    border: 2px solid #226ec5;
+    background-color: #226ec5;
+    color: #f4f4f4;
+    opacity: 0.65;
+  }

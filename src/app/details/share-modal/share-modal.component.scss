@@ -1,0 +1,48 @@
+.close-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 0.2rem;
+  border: 2px solid #d4d4d4;
+  background-color: #d4d4d4;
+  color: #111111;
+  padding: 0.2rem 0.75rem;
+  transition: 0.5s;
+}
+.close-btn:hover {
+  border: 2px solid red;
+  background-color: red;
+  color: white;
+}
+.modal-header {
+  margin-top: 2rem;
+  padding: unset;
+  border-bottom: unset;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+}
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #000;
+  line-height: 1.29;
+  margin: 0 0 0.75rem;
+}
+.content-container {
+  padding: 0.25rem 0;
+}
+.content-container p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #818181;
+  text-align: center;
+  line-height: 1.49;
+}
+.social-img {
+  text-align: center !important;
+  margin: 0.75rem 0rem;
+}
+.social-img img {
+  width: 3rem;
+  margin: 0rem 0.75rem;
+}

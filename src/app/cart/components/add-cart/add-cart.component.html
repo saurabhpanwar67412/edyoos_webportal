@@ -1,0 +1,19 @@
+<form action="" [formGroup]="paymentForm">
+  <div class="row no-gutters">
+    <div class="col-lg-6 col-md-8 col-12 px-2">
+      <div class="form-group">
+        <label for="card-name">Card holder name</label>
+        <input style="min-height: 2.75rem;" type="text" class="form-control" id="card-name"
+          [formControlName]="CART_CHECKOUT_METADATA.cardName" aria-describedby="cardname" placeholder="Card Name">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-8 col-12  px-2">
+      <div class="form-group">
+        <label for="card-element">Credit or debit number</label>
+        <div id="card-element" class="border-style" #cardElement>
+        </div>
+        <p id="card-error" role="alert" class="text-danger mb-0">{{cardErrors}}</p>
+      </div>
+    </div>
+  </div>
+</form>

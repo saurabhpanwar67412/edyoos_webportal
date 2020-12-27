@@ -1,0 +1,115 @@
+<section class="contact-wrapper" style="overflow: hidden;">
+  <div class="container-fluid mx-0 px-0">
+    <app-nav-bar-new></app-nav-bar-new>
+    <div class=" mx-0 px-0" style="padding-top: 100px;">
+      <div class="row text-center  mx-0 px-0">
+        <div class="col-12 col-md-6  mx-0 px-0" style="background-color: #000;padding-top: 60px;padding-bottom: 60px;">
+          <h1 class="h1 font-weight-bold text-white text-center pt-5" style="font-size: 35px;letter-spacing: 10px;">
+            CONTACT US
+          </h1>
+          <div style="width: 75px;height: 8px;background-color: #fff;" class="mx-auto my-2"></div>
+          <div class="text-light py-4 mx-auto">
+            <span>Phone: <a class="text-decoration-underline ml-2" href="tel:844-633-9667"> 844-633-9667</a></span> <br>
+            <span>Email: <a class="text-decoration-underline ml-2"
+                href="mailto:support@edyoos.com">support@edyoos.com</a></span>
+          </div>
+          <div class="py-1">
+            <!-- <a class="my-1" href="https://www.facebook.com/edyoosparking/"> <img style="width: 30px;"
+                src="/assets/images/facebook-icon.png" /></a> -->
+            <!-- <span class="material-icons text-white" style="font-size: 35px;">
+              facebook
+            </span> -->
+            <!-- <i class="fab fa-youtube text-white"></i>
+            <span class="material-icons text-white" style="font-size: 35px;">
+              facebook
+            </span> -->
+            <a target="fbWindow" href="https://www.facebook.com/edyoosparking/">
+              <img class="mr-1"
+              src="https://static.wixstatic.com/media/ce6ec7c11b174c0581e20f42bb865ce3.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01/ce6ec7c11b174c0581e20f42bb865ce3.webp"
+              alt="">
+            </a>
+            <a target="instaWindow" href="https://www.instagram.com/accounts/login/?next=/edyoos/">
+              <img class="mr-1"
+              src="https://static.wixstatic.com/media/fdcfaba150fc427da298a00cb09d91c1.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01/fdcfaba150fc427da298a00cb09d91c1.webp"
+              alt="">
+            </a>
+            <a target="ytWindow" href="https://www.youtube.com/channel/UCoztuFfw-q2SqrVwPeWOiDQ">
+              <img class="mr-1"
+              src="https://static.wixstatic.com/media/71ac09a5a92848cc943bf2ca2a09a6d0.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01/71ac09a5a92848cc943bf2ca2a09a6d0.webp"
+              alt=""> 
+            </a>
+                       
+            <!-- <a class="my-1" href="https://twitter.com/EdyoosParking"> <img style="width: 30px;"
+                src="/assets/images/twitter-icon.png" /></a>
+            <a class="my-1" href="https://www.instagram.com/accounts/login/?next=/edyoos/"> <img style="width: 30px;"
+                src="/assets/images/instagram.png" /></a> -->
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mx-0 py-5" style="background-color: #fff;padding-top: 60px;padding-bottom: 60px;">
+          <h1 class="h1 font-weight-bold  text-center py-2" style="font-size: 30px;">Or Send Us A Message!
+          </h1>
+          <form [formGroup]="emailUsFormGroup">
+            <div class="row">
+              <div class="col-12 col-md-8 mx-auto">
+                <div class="form-content">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <input class="form-control form-control-lg" type="text" formControlName="firstName"
+                          placeholder="First Name" required (blur)="logValidationErrors()" />
+                        <div *ngIf="formErrors.firstName" class="text-danger">
+                          {{formErrors.firstName}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" formControlName="lastName"
+                          placeholder="Last Name" (blur)="logValidationErrors()" />
+                        <div *ngIf="formErrors.lastName" class="text-danger">
+                          {{formErrors.lastName}}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="form-group">
+                        <input class="form-control form-control-lg" type="email" formControlName="email"
+                          placeholder="Email" (blur)="logValidationErrors()" />
+                        <div *ngIf="formErrors.email" class="text-danger">
+                          {{formErrors.email}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <input class="form-control form-control-lg" type="text" formControlName="phone"
+                          placeholder="Phone" (blur)="logValidationErrors()" />
+                        <div *ngIf="formErrors.phone" class="text-danger">
+                          {{formErrors.phone}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <textarea placeholder="Message" class="form-control" formControlName="message"
+                        id="exampleFormControlTextarea1" (blur)="logValidationErrors()" rows="3"></textarea>
+                      <div *ngIf="formErrors.message" class="text-danger">
+                        {{formErrors.message}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group text-center mt-2">
+                    <button class="btn btn-login" type="submit" (click)="sendMessage()" [disabled]="emailUsFormGroup.invalid">Send
+                      Message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,84 @@
+
+<div class="f20 fmmedium bkclr13 mt-2">Fare Breakup</div>
+<div class="fl100 bk-box-right mb-3">
+  <div class="fl100 bk-price-bx">
+    <ul class="fcl9 fmbook">
+      <li>
+        <span class="bk-price-lbl f14">Base Price<span class="f12 bkclr11">({{bookedPlaces && bookedPlaces.length}} x Parking)</span></span>
+        <span class="bk-price-fig f16">{{checkOutAmount | currency }}</span>
+      </li>
+      <li>
+        <span class="bk-price-lbl f14">Taxes</span>
+        <span class="bk-price-fig f16">$ 0.00</span>
+      </li>
+      <li *ngIf="additionalFeeAmount!=0">
+        <span class="bk-price-lbl f14">Add Fees({{additionalFeeCount}}): </span>
+        <span class="bk-price-fig f16">{{ additionalFeeAmount | currency }}</span>
+      </li>
+      <li *ngIf="promoCodeDiscountPercentage!=0">
+        <span class="bk-price-lbl f14">Discount: </span>
+        <span class="bk-price-fig f16">-{{ promoCodeDiscountAmount | currency }}</span>
+      </li>
+      <li>
+        <span class="bk-price-lbl f14">Total Fare</span>
+        <span class="bk-price-fig f16">{{checkOutAmount | currency }}</span>
+      </li>
+      <li class="bk-total-amt fmmedium f20">
+        <span class="bk-price-lbl">You Pay</span>
+        <span class="bk-price-fig">{{ this.total | currency }}</span>
+      </li>
+    </ul>
+  </div>
+  <!-- <div class="fl100 text-center f14 py-3 bkclr10 fmbook">No Cancellation - This booking will start immediately</div> -->
+  <div class="bk-price-divider"></div>
+  <ng-container *ngFor="let bookedPlace of bookedPlaces; let i = index">
+  <div class="bk-order-bx fl100">
+    <div class="f18 fmmedium fcwhite bkorder-h2">{{ bookedPlace?.propertyname || bookedPlace?.propertyName }}<a (click)="hidedivpanel()" class="float-right d-lg-none"><img src="./assets/images/minus-bk.png" alt=""/></a></div>
+    <div *ngIf="hidediv">
+    <div class="text-right col" *ngIf="bookedPlaces.length > 1">
+      <span *ngIf="!hideRemoveCartItemBtn" style="cursor: pointer;" (click)="removeItem(i)">
+        <img style="max-width: 20px;" src="./assets/images/trash.png">
+      </span>
+
+      <span *ngIf="hideRemoveCartItemBtn" class="spinner-border text-danger" style="width: 1rem; height: 1rem;"
+        role="status">
+        <span class="sr-only">Loading...</span>
+      </span>
+
+    </div>
+    <div class="fl100 bk-order-img" *ngIf="bookedPlace.files">
+      <img [src]="bookedPlace.files[0].filePath" />
+    </div>
+    <div class="bk-order-content fl100">
+      <!-- <ul class="bk-order-amelist">
+        <li>
+          <img src="./assets/images/Car-Wash.png" alt=""/>
+        </li>
+        <li>
+          <img src="./assets/images/Security-Camera_s.png" alt=""/>
+        </li>
+        <li>
+          <img src="./assets/images/Ev-Charging-Station.png" alt=""/>
+        </li>
+        <li>
+          <img src="../images/Handicap-Accessible.png" alt=""/>
+        </li>
+      </ul> -->
+      <div class="bk-order-header f16 fmmedium bkclr1">
+        About this Place
+      </div>
+      <div class="bk-order-desc text-justify bkclr14 f13">
+        <p>
+          <app-read-more [maxHeight]="75" [text]="bookedPlace.details"></app-read-more>
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+</ng-container>
+</div>
+    
+    
+    
+      
+  

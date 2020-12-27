@@ -1,0 +1,388 @@
+
+<div class="" *ngIf="!loggedIn && !guestBtnClick">
+  <!-- <a (click)="reloadWindow()" style="cursor: pointer;" class="btn-link f14">Login</a> -->
+  <div class="f20 fmmedium bkclr1">Contact Information</div>
+    <div class="fl100 bk-box mb-2 bk-form-inp" [formGroup]="paymentForm">
+      <div class="row bk-form-inp">
+        <div class="col-md-6">
+          <!-- <label class="bkclr12 f14 fmlight">Email Id</label>
+          <input type="text" /> -->
+          <mat-form-field>
+            <input matInput placeholder="Email Address" required [formControlName]="CART_CHECKOUT_METADATA.email">
+            <mat-error *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.email).valid &&
+              paymentForm?.get(CART_CHECKOUT_METADATA.email).touched && 
+              paymentForm?.get(CART_CHECKOUT_METADATA.email).hasError('email')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.email).valid &&
+            paymentForm?.get(CART_CHECKOUT_METADATA.email).touched && 
+            paymentForm?.get(CART_CHECKOUT_METADATA.email).hasError('required')">
+              Email is Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <input matInput placeholder="Phone number" [formControlName]="CART_CHECKOUT_METADATA.phone">
+
+            <mat-error *ngIf="paymentForm?.get(CART_CHECKOUT_METADATA.phone).hasError('required')
+            && paymentForm?.get(CART_CHECKOUT_METADATA.phone).touched">
+              phone number is required
+            </mat-error>
+
+            <mat-error *ngIf="paymentForm?.get(CART_CHECKOUT_METADATA.phone).hasError('pattern')
+            && paymentForm?.get(CART_CHECKOUT_METADATA.phone).touched">
+              Phone must be a valid phone number
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <p class="f12 fmbook bkclr11 mt-2">Your booking details will be sent to this email address and mobile number.</p>
+        </div>
+        <div class="col-md-4" *ngIf="!buttonclicked">
+          <button class="cart-btn d-md-inline-block d-block col-12 col-md-auto" (click)="nextStep()">
+            Check out as guest
+          </button>
+        </div>
+      </div>
+     
+    </div>
+</div>
+<div class="clearfix"></div>
+<div *ngIf="loggedIn !== undefined">
+<div class="f20 fmmedium bkclr1">Payment Method</div>
+<div class="fl100 bk-box mb-2 bk-form-inp bk-form-inp-mb" [formGroup]="paymentForm" >
+  <div class="bk-payment-box">
+    
+    <ng-container *ngIf="hasCards === undefined">
+      <div class="col-5 mt-5">
+        <div class="ph-item">
+          <div class="col-12">
+            <div class="ph-row">
+              <div class="ph-col-12"></div>
+              <div class="ph-col-12"></div>
+              <div class="ph-col-12"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="fl100" [hidden]="!(hasCards === false)">
+        <form [formGroup]="paymentForm">
+          
+            <div class="row">
+              <div class="col-md-12">
+                <label class="f14 fmlight bkclr12 d-block" for="card-name">Card holder name <span class="text-danger">*</span></label>
+                <input style="min-height: 2.75rem;" type="text" class="form-control" id="card-name"
+                  [formControlName]="CART_CHECKOUT_METADATA.cardName" aria-describedby="cardname"
+                  placeholder="Card Name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="f14 fmlight bkclr12 d-block" for="card-element">Credit or debit number <span class="text-danger">*</span></label>
+                <div id="card-element" class="border-style" #cardElement>
+                </div>
+                <p id="card-error" role="alert" class="text-danger mb-0">{{cardErrors}}</p>
+              </div>
+            </div>
+          
+        </form>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="hasCards">
+      <div class="col-12 d-lg-none">
+        <div class="text-right pr-3 pr-md-0">
+          <a class="text-danger " style="cursor: pointer;" *ngIf="isPaymentChange"
+            (click)="isPaymentChange = false">Cancel</a>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-12">
+        <div class="row no-gutter" *ngIf="!isPaymentChange">
+          <div class="col-9">
+            <span class="font-weight-bold"> Payment method</span> - <img [src]="getImage(cards[0].brand)"
+              class="mr-1" style="width: 1.5rem;" />
+            <span class="font-weight-bold">
+              {{cards[0].brand}} - <span style="font-size: 12px;">{{cards[0].last4}}</span>
+            </span>
+          </div>
+          <div class="col-3 text-lg-right">
+            <a style="cursor: pointer;" class="btn-link pl-0 ml-0" (click)="onPaymentTypeChange()">Change</a>
+          </div>
+        </div>
+        <div class="row no-gutters" *ngIf="isPaymentChange">
+          <div class="col-12">
+            <div class="row py-3 border px-2 bg-light no-gutters align-items-center">
+              <div class="col-xl-5 col-lg-7 col-7">
+                <p class="font-weight-bold mb-0">
+                  Your credit and debit cards</p>
+              </div>
+              <div class="col-xl-3 col-lg-2 col-3">
+                <p class="font-weight-bold mb-0">
+                  Name on card</p>
+              </div>
+              <div class="col-xl-4 col-lg-3 col-2">
+                <div class="">
+                  <p class="font-weight-bold mb-0">
+                    Expires on <a class="text-danger font-weight-bold pl-xl-1 pl-lg-2 d-none d-lg-inline-block"
+                      style="cursor: pointer;float: right;" *ngIf="isPaymentChange"
+                      (click)="isPaymentChange = false">Cancel</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-0" />
+          <div class="col-12 border px-2 py-1" *ngFor="let card of cards;let last=last">
+            <div class="row no-gutters align-items-center">
+              <div class="col-xl-6  col-lg-7 col-md-8 col-8">
+                <mat-radio-group class="align-items-center" [name]="'card'"
+                  [formControlName]="CART_CHECKOUT_METADATA.card" aria-label="Select an option">
+                  <mat-radio-button [name]="'card'" [value]="card.id">
+                    <img [src]="getImage(card.brand)" class="mr-1" style="height: 1.6rem;" class="mr-2" />
+                    <!-- <span class="font-weight-bold text-uppercase mr-2"> {{card.brand}} </span> -->
+                    <span class="font-weight-bold text-uppercase"> &nbsp; </span>
+                  </mat-radio-button>
+                  <span style="word-wrap: break-word;"> Ending in
+                    {{card.last4}}</span>
+                  <br />
+                </mat-radio-group>
+              </div>
+              <div class="col-xl-3  col-lg-2 col-md-2 col-2">
+                {{ card?.billingDetailsUpdate?.name }}
+              </div>
+              <div class="col-xl-3  col-lg-3 col-md-2 pl-lg-3 col-2">
+                {{card?.cardUpdate?.expMonth }}/{{card?.cardUpdate?.expYear}}
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row no-gutters align-items-center">
+              <div class="col-12 align-items-center">
+                <div class="row align-items-center">
+                  <div class="col-md-8 col-12 px-3" style="cursor: pointer;" (click)="AddNewCardInstead()">
+                    <span style="font-size: 1.5rem;" class="mx-3">+</span> <img src="./assets/images/VISA.png"
+                      style="width: 2.5rem;" class="mr-2" />
+                    <span class="btn-link" style="cursor: pointer;">Add New Debit/Credit
+                      Card</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div>         
+    </ng-container>
+    <div class="clearfix"></div>
+    <div class="fl100">
+    <div class="row no-gutters m-0 p-0">
+      <div class="col-12 d-flex align-items-center">
+        <label for="promocode" class="font-weight-bold my-1">Add gift card or promotion code or
+          voucher</label>
+        <label class="pt-2 text-primary" *ngIf="!(promoCodeDiscountPercentage!=0 || disCountApplied)">
+          <span class="material-icons" (click)="promoToggler = !promoToggler" *ngIf="promoToggler">
+            expand_less
+          </span>
+          <span class="material-icons" (click)="promoToggler = !promoToggler" *ngIf="!promoToggler">
+            expand_more
+          </span>
+        </label>
+      </div>
+
+      <div class="col-12 form-inline"
+        *ngIf="!(promoCodeDiscountPercentage!=0 || disCountApplied) && promoToggler">
+        <div class="form-group mt-md-0 mt-2">
+          <input type="text" #promocode name="promocode" id="promocode"
+            class="form-control form-control-sm">
+        </div>
+        <button mat-stroked-button color="primary" [disabled]="promocode.length==0"
+          (click)="getPromoCodeDiscountPercent(promocode.value)" class="ml-3">Apply</button>
+        <span class="text-danger py-1" *ngIf="inValidPromoCodeMessage">{{inValidPromoCodeMessage}}</span>
+      </div>
+
+      <div class="col-12 form-inline" *ngIf="promoCodeDiscountPercentage!=0 || disCountApplied">
+        <div class="form-group mb-1">
+          <p class="mb-0 text-success">Promocode has been applied</p>
+        </div>
+        <button class="btn py-0 btn-outline-danger ml-3" (click)="cancelPromoCode()">cancel</button>
+      </div>
+    </div>
+  </div>
+<div class="col-12 pl-0 text-left">
+  
+  <a class="text-danger font-weight-bold float-right pr-3" style="cursor: pointer;" *ngIf="this.isAddNewCard"
+    (click)="addCardCancel()">Cancel</a>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <label class="f13 fmmedium fcblue d-block mb-3">100% <span class="f15 fmbold bkclr17">SECURE</span> checkout Guaranteed</label>
+    <div class="bkoverlay-container">
+        <label class="f12 fmbook bkclr11 bkoverlay1">Edyoos supports all major credit cards</label>
+        <ul class="bk-payoption-list">
+          <li><img src="./assets/images/bkpay-afs.png" alt="" /></li>
+          <li><img src="./assets/images/bkpay-visa.png" alt="" /></li>
+          <li><img src="./assets/images/bkpay-master.png" alt="" /></li>
+          <li><img src="./assets/images/bkpay-amex.png" alt="" /></li>
+          <li><img src="./assets/images/bkpay-card.png" alt="" /></li>
+          <li><img src="./assets/images/bkpay-etc.png" alt="" /></li>
+        </ul>
+        <label class="f12 fmbook bkclr18 bkoverlay2">Powered By <img src="./assets/images/bkpay-stripe.png" alt=""/></label>
+      </div>
+  </div>
+</div>
+  </div>
+</div>
+</div>
+<div class="clearfix"></div>
+        
+          
+          
+          
+          
+              
+        
+      
+
+ 
+<div [formGroup]="paymentForm" *ngIf="loggedIn !== undefined">
+  <div class="f20 fmmedium bkclr1">Vehicle Details</div>
+
+          <div class="fl100 bk-box mb-2 bk-form-inp bk-form-inp-mb" *ngIf="vehicledetails.length>0">
+            <div class="row">
+            <div class="col-lg-6 col-12">
+              <mat-form-field *ngIf="!showAddVehicleInfo">
+                <mat-label>Vehicle Details</mat-label>
+                <mat-select [formControlName]="CART_CHECKOUT_METADATA.vehicleId" required>
+                  <mat-option *ngFor="let vehicle of vehicledetails" [value]="vehicle.id">
+                    {{vehicle.licensePlateNumber}}</mat-option>
+                </mat-select>
+                <mat-error>
+                  Vehicle Number is Required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-12 text-lg-right text-center">
+              <a style="cursor: pointer;" class="btn-link pl-0" (click)="addVehicleInfo()"
+                *ngIf="!showAddVehicleInfo">+Add New Vehicle</a>
+            </div>
+          </div>
+          </div>
+
+          <div class="fl100 bk-box mb-2 bk-form-inp bk-form-inp-mb" *ngIf="showAddVehicleInfo" [formGroupName]="CART_CHECKOUT_METADATA.vehicleInfo">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input matInput placeholder="License plate number" required maxlength="50"
+                    [formControlName]="CART_CHECKOUT_METADATA.licenseNumber">
+                  <mat-error
+                    *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.licenseNumber)?.valid &&
+            paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.licenseNumber)?.touched && 
+            paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.licenseNumber)?.hasError('required')">
+                    License Number is Required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input matInput placeholder="Make" required maxlength="100"
+                    [formControlName]="CART_CHECKOUT_METADATA.vehicleMake" [matAutocomplete]="autoMakes" (focusout)="onMakeFocusOut($event)" />
+                  <mat-autocomplete #autoMakes="matAutocomplete">
+                    <mat-option *ngFor="let make of filteredMakes | async" [value]="make.Make_Name">{{make.Make_Name}}</mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleMake)?.valid &&
+              paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleMake)?.touched && 
+              paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleMake)?.hasError('required')">
+                    Make is Required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+              <div class="row">
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input matInput placeholder="Model" required maxlength="50"
+                    [formControlName]="CART_CHECKOUT_METADATA.vehicleModel" [matAutocomplete]="autoModels" (focusout)="onModelFocusOut($event)" />
+                  <mat-autocomplete #autoModels="matAutocomplete">
+                      <mat-option *ngFor="let make of filteredModels | async" [value]="make.Model_Name">{{make.Model_Name}}</mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleModel)?.valid &&
+                    paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleModel)?.touched && 
+                    paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleModel)?.hasError('required')">
+                    Model is Required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input matInput placeholder="Color" maxlength="50"
+                    [formControlName]="CART_CHECKOUT_METADATA.vehicleColor" required>
+                  <mat-error
+                    *ngIf="!paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleColor)?.valid &&
+          paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleColor)?.touched && 
+          paymentForm?.get(CART_CHECKOUT_METADATA.vehicleInfo)?.get(CART_CHECKOUT_METADATA.vehicleColor)?.hasError('required')">
+                    Color is Required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-auto pl-lg-4  col-6">
+                <mat-slide-toggle class="mt-2" (click)="setDefault()">
+                  Default
+                </mat-slide-toggle>
+              </div>
+
+              <div class="col-auto ml-auto" *ngIf="vehicledetails.length>0">
+                <button type="button" class="btn btn-link text-danger" (click)="cancelAddVehicle()">Cancel</button>
+              </div>
+            </div>
+
+          </div>
+        
+        <div *ngIf="httpError" class="text-danger text-center">
+          {{httpError}}
+        </div>
+        <div class="fl100">
+          <div class="row no-gutters justify-content-between">
+            <div class="col-12 col-lg-auto">
+              <div class="fl100 my-4 bklinkdoc">
+                <label class="bkclr12 f12 fmlight">By placing your order, you are agree to Edyoos's <a (click)="openPrivacyNewWindow()"  class="fcblue fmmedium"> Privacy Notice</a> and <a (click)="openTermsNewWindow()" class="fcblue fmmedium">Terms & Conditions</a></label>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+              <div class="fl100 bk-box-btn">
+                <button class="bk-btn" type="button"
+                    [disabled]="(paymentForm?.invalid) || !isValidCreditCard || checkOutBtnClicked" (click)="checkout()">
+      
+                    <span class="spinner-border spinner-border-sm" role="status" *ngIf="checkOutBtnClicked"
+                      aria-hidden="true"></span>
+                   {{!checkOutBtnClicked?'Book Now':'Loading...'}} $ {{total}}
+                  </button>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-xl-4 col-lg-5 col-md-6 ml-md-auto col-12">
+            <!-- <button class="px-5 btn btn-danger d-xl-inline-block d-block btn-block"
+              [disabled]="(paymentForm?.invalid) || !isValidCreditCard" (click)="checkout()">
+              Reserve Now
+            </button> -->
+            
+          </div>
+        </div>
+        
+        
+        <div class="clearfix"></div>
+				
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>

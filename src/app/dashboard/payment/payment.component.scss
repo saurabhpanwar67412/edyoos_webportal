@@ -1,0 +1,78 @@
+.example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    display:block;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -92px;
+  }
+  .border-style{
+    border-style: ridge !important;
+    border: 1px solid #ced4da !important;
+  }
+  
+#card-element {
+  border-radius: 4px 4px 0 0 ;
+  padding: 12px;
+  border: 1px solid rgba(50, 50, 93, 0.1);
+  height: 44px;
+  width: 100%;
+  background: white;
+}
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .payment-card-img{
+    width: 28px;
+    height: 20px;
+    margin-right: 6px;
+  }
+
+  .example-button-row {
+    display: table-cell;
+    width: 490px;
+  }
+  
+  .example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  .mat-bg-color{
+    background-color: #e5eaf5;
+  }
+  .mat-header-bg-color{
+    background-color: #ffffff !important
+  }
+  @media (max-width: 767px){
+    .mat-panel-title{
+      margin-left: 0px;
+    }
+    .mat-expansion-panel-body {
+      padding: 0px !important;
+    }
+    .mat-expansion-panel-header {
+      height: auto !important;
+    }
+    .mat-expansion-panel-header-title {
+      margin: 0px !important;
+      padding: 0px !important;
+      min-width: 180px !important;
+    }
+    .mat-expansion-panel-header-description{
+      margin: 0px !important;
+    }
+    .mat-expansion-panel-body {
+      padding: 0 !important;
+    }
+    .ex-date{
+      position: relative;
+      top: 15px;
+    }
+}

@@ -1,0 +1,55 @@
+<div style="overflow: hidden;">
+  <h2 class="h2 text-center py-2 " style="background-color: #e5eaf5;">Update License
+    Plate</h2>
+  <div class="mt-2 px-2 py-5">
+    <div class="row align-items-center" [formGroup]="vehicleForm">
+      <mat-form-field class="col-lg-4 col-12 md-3">
+        <input matInput type="text" placeholder="Licence Plate Number" formControlName="vehicleLicensePlateNumber"
+          maxlength="50" /><br />
+        <mat-error>
+          Licence Plate is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-lg-4 col-12 md-3">
+        <input matInput type="text" placeholder="Make" maxlength="100" formControlName="vehicleMake" required
+        [matAutocomplete]="autoMakes" (focusout)="onMakeFocusOut($event)" /><br />
+        <mat-autocomplete #autoMakes="matAutocomplete">
+          <mat-option *ngFor="let make of filteredMakes | async" [value]="make.Make_Name">{{make.Make_Name}}</mat-option>
+      </mat-autocomplete>
+        <mat-error>
+          Make is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-lg-4 col-12 md-3">
+        <input matInput type="text" placeholder="Model" maxlength="50" formControlName="vehicleModel" required 
+        [matAutocomplete]="autoModels" (focusout)="onModelFocusOut($event)" /><br />
+        <mat-autocomplete #autoModels="matAutocomplete">
+          <mat-option *ngFor="let make of filteredModels | async" [value]="make.Model_Name">{{make.Model_Name}}</mat-option>
+      </mat-autocomplete>
+        <mat-error>
+          Model is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-lg-4 col-12 md-3">
+        <input matInput type="text" placeholder="Color" maxlength="50" formControlName="color" required /><br />
+        <mat-error>
+          Model is required
+        </mat-error>
+      </mat-form-field>
+      <div class="col-lg-4 col-12 md-3">
+        <span class="mr-2">Default</span>
+        <mat-slide-toggle [checked]="this.data.isDefault" (click)="setDefault()"></mat-slide-toggle>
+
+      </div>
+      <div class="col-md-12">
+        <div class="float-right">
+          <button type="button" (click)="cancelVehicle()" class="btn btn-secondary mr-2"> Cancel</button>
+          <button type="submit" (click)="updateVehicle()" [disabled]="vehicleForm.invalid || !vehicleForm.dirty" class="btn btn-primary">
+            Update Address </button></div>
+      </div>
+      <div class="text-danger text-center">
+        {{httpError}}
+      </div>
+    </div>
+  </div>
+</div>

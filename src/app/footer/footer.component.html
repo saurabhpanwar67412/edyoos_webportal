@@ -1,0 +1,78 @@
+<div class="footer-container">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-menu-list-1 fl100">
+					<ul>
+						<li><a [routerLink]="['/landing/home']">Home</a></li>
+						<li><a [routerLink]="['/pages/partnerships']">Business Solutions</a></li>
+						<li><a [routerLink]="['/pages/refund']">Refunds & Cancellations</a></li>
+						<!-- <li><a [routerLink]="['/pages/faq']">Faq</a></li> -->
+					</ul>
+				</div>
+				<div class="footer-menu-list-2 fl100">
+					<ul>
+						<li><a href="tel:844-633-9667"><img src="assets/images/footer-tel.png" alt=""/>844-633-9667</a></li>
+						<li><a href="mailto:support@edyoos.com"><img src="assets/images/footer-mail.png" alt=""/>support@edyoos.com</a></li>
+						<li class="footer-menu-list-social">
+							<ul>
+								<li>Follow Us on</li>
+								<li><a target="fbWindow" href="https://www.facebook.com/edyoosparking/"><img src="assets/images/footer-fb.png" alt=""/></a></li>
+								<li><a target="instaWindow" href="https://www.instagram.com/accounts/login/?next=/edyoos/"><img src="assets/images/footer-insta.png" alt=""/></a></li>
+								<li><a target="ytWindow" href="https://www.youtube.com/channel/UCoztuFfw-q2SqrVwPeWOiDQ"><img src="assets/images/footer-youtube.png" alt=""/></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-menu-list-3 fl100">
+					<ul>
+						<li>
+							<a target="_blank" href="https://apps.apple.com/us/app/edyoos/id1511587153">
+								<img src="assets/images/footer-apple.png" alt="" />
+								<span class="fmb-desc">
+									<label class="fmdlbl1">Download on the</label>
+									<label class="fmdlbl2">Apple Store</label>
+								</span>
+							</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://play.google.com/store/apps/details?id=web2application.a221271579920460.com.myapplication">
+								<img src="assets/images/footer-gplay.png" alt="" />
+								<span class="fmb-desc">
+									<label class="fmdlbl1">Get it on</label>
+									<label class="fmdlbl2">Google Play</label>
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom container-fluid">
+		<div class="row">
+			<div class="col-lg-6 col-sm-12 order-2 order-lg-1">
+				<div class="fcprydesc f12 fmbook">Copyright &copy; 2020 - Edyoos. All rights reserved.<span class="fmmedium"> Powered by Edyoos</span></div>
+			</div>
+			<div class="col-lg-6 col-sm-12 order-1 order-lg-2 text-right">
+				<ul class="fbtermlist">
+					<li><a (click)="openTermsNewWindow()">TERMS & CONDITIONS</a></li>
+          <li><a (click)="openPrivacyNewWindow()">PRIVACY POLICY</a></li>
+          <li><a (click)="openCookieNewWindow()">COOKIE POLICY</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div (click)="scrolltoTop()" class="up-arrow-icon" *ngIf="showUpArrow">
+  <svg style="width: 40px;height: 20px;" preserveAspectRatio="none" data-bbox="19.999 58 160.001 84"
+    viewBox="19.999 58 160.001 84" height="41px" width="21px" xmlns="http://www.w3.org/2000/svg" data-type="shape"
+    role="img">
+    <g>
+      <path fill="#4919db"
+        d="M172.5 142a7.485 7.485 0 0 1-5.185-2.073L100 75.808l-67.315 64.12c-2.998 2.846-7.74 2.744-10.606-.234a7.454 7.454 0 0 1 .235-10.565l72.5-69.057a7.524 7.524 0 0 1 10.371 0l72.5 69.057a7.455 7.455 0 0 1 .235 10.565A7.503 7.503 0 0 1 172.5 142z">
+      </path>
+    </g>
+  </svg>
+</div>

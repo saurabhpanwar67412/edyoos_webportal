@@ -1,0 +1,250 @@
+.column-one{
+    flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+.column-two{
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+.input-col{
+  background-color: white;
+  margin: 1rem 1rem 1rem 3rem;
+  padding: 1rem;
+}
+.input-col .col-3{
+  text-align: right;
+}
+.example-card,.change-pw {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  }
+  .change-pw{
+    background-color:white;
+    text-align: center;
+    padding: 1rem;
+  }
+  .change-pw h1,.input-col h1,.column-one h1{
+    text-align: left;
+    font-size: 1.5rem;
+    color: #818181;
+    padding: 8px 15px;
+    border-bottom: 1px solid #d8d8d8;
+  }
+  .input-col p{
+    font-size: 1rem;
+    padding: 8px 15px;
+    margin: 0px;
+  }
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .profile-page{
+    background-color: #F9F7FD;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+  // .img-space{
+  //   text-align: center;
+  //   position: relative;
+  //   background-image: url("/assets/images/placeholder.png");
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   display: inline-block;
+  //   height: 0;
+  //   width: 100%;
+  //   padding-bottom: 100%;
+  //   border-radius: 100%;
+  // }
+  // .profile-img{
+  //   width:100%;
+  //   padding-bottom: 100%;
+  //   border-radius: 100%;
+  // }
+  .img-space {
+    position: relative;
+    width: 100%; /* The size you want */
+  }
+  .img-space:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+  }
+  
+  .img-space img {
+    position: absolute; /* Take your picture out of the flow */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; /* Make the picture taking the size of it's parent */
+    width: 100%; /* This if for the object-fit */
+    height: 100%; /* This if for the object-fit */
+    // object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+    object-position: center;
+    border-radius: 100%;
+  }
+  .btn-file,.btn-pw {
+    text-align: center;
+    border-radius: 2rem;
+    border: 2px solid #3489eb;
+    background-color: #3489eb;
+    color: #f4f4f4;
+    padding: 0.2rem 0.75rem;
+    transition: 0.5s;
+  }
+  .btn-pw{
+    margin: 0.5rem 0.5rem 1rem 0.5rem;
+    width: 60%;
+    box-sizing: border-box;
+  }
+  .btn-file:hover,.btn-pw:hover {
+    border: 2px solid #3489eb;
+    background-color: #f4f4f4;
+    color: #3489eb;
+  }
+  
+  .btn-file:disabled,.btn-pw:disabled {
+    border: 2px solid #226ec5;
+    background-color: #226ec5;
+    color: #f4f4f4;
+    opacity: 0.65;
+  }
+  .btn-file p,.btn-pw p{
+    margin: 0px;
+  }
+
+  .btn-remove {
+    text-align: center;
+    border-radius: 2rem;
+    border: 2px solid #eb3434;
+    background-color: #eb3434;
+    color: #f4f4f4;
+    padding: 0.2rem 0.75rem;
+    transition: 0.5s;
+  }
+  .btn-remove:hover{
+    border: 2px solid #eb3434;
+    background-color: #f4f4f4;
+    color: #eb3434;
+  }
+  .input-table{
+    width: 100%;
+  }
+  .input-table tr td:first-child{
+    width: 25%;
+    text-align: right;
+  }
+  .input-table tr td:last-child{
+    padding: 0rem 1rem;
+    width: 70%;
+  }
+  .input-table label{
+    font-size: 1rem;
+    margin: 0px;
+  }
+
+  .btn-discard{
+    text-align: center;
+    border-radius: 2rem;
+    border: 2px solid #3489eb;
+    background-color: #ffffff;
+    color: #3489eb;
+    padding: 0.2rem 0.75rem;
+    width: 20%;
+    transition: 0.5s;
+    margin: 0.5rem 10% 1rem 20%;
+  }
+  .btn-discard:hover {
+    border: 2px solid #3489eb;
+    background-color: #3489eb;
+    color: #ffffff;
+  }
+
+  .btn-discard:disabled {
+    border: 2px solid #ffffff;
+    background-color: #ffffff;
+    color: #226ec5;
+    opacity: 0.65;
+  }
+  .btn-save{
+    text-align: center;
+    border-radius: 2rem;
+    border: 2px solid #3489eb;
+    background-color: #3489eb;
+    color: #ffffff;
+    padding: 0.2rem 0.75rem;
+    width: 20%;
+    transition: 0.5s;
+    margin: 0.5rem 20% 1rem 10%;
+  }
+  .btn-save:hover {
+    border: 2px solid #3489eb;
+    background-color: #ffffff;
+    color: #3489eb;
+  }
+
+  .btn-save:disabled {
+    border: 2px solid #226ec5;
+    background-color: #226ec5;
+    color: #ffffff;
+    opacity: 0.65;
+  }
+
+.custom-row {
+    display: flex;
+  flex-wrap: wrap;
+}
+
+.text-area {
+  overflow: hidden;
+}
+.required {
+  color: red;
+}
+
+.br-5 {
+  border-radius: 5rem;
+}
+table {
+  width:100%;
+}
+.profile-image{
+  width: 150px;
+}
+.bg-my-light{
+  background-color: #e5eaf5;
+}
+@media (max-width: 991.98px){
+  .profile-image{
+    width: 75px;
+  } 
+  .btn-remove{
+    display: inline-block !important;
+    margin: 0 auto;
+    max-width: 100px;
+  }
+  .btn-file{
+    display: inline-block !important;
+    max-width: 100px;
+    margin: 0 auto;
+  }
+  .bg-my-light {
+    background-color: initial;
+  }
+  .btn-save{
+    min-width: 100px !important;
+  }
+}
+@media (max-width: 767.98px){
+  .table .table-borderless,table,tr,th,td{
+    padding: 0px !important;
+  }
+ 
+}
+
+.mat-slide-toggle {
+  margin-left: 3px;
+}

@@ -1,0 +1,14 @@
+<app-nav-bar></app-nav-bar>
+<p style="margin-top: 60px;display: hidden;">
+</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <app-cart-information></app-cart-information>
+      <app-cart-checkout [formType]="'guest'" [pageTitle]="'Checkout as guest'"></app-cart-checkout>
+    </div>
+    <div class="col-4">
+      <app-orders></app-orders>
+    </div>
+  </div>
+</div>

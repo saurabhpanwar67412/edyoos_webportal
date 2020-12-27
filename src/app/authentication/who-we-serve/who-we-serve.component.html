@@ -1,0 +1,526 @@
+<div class="landing-page-wrapper">
+<app-nav-bar-new></app-nav-bar-new>
+<div class="clearfix"></div>
+    <div class="video-container">
+        <div class="part-video-bg">
+            <video autoplay muted loop id="bgVideo">
+              <source src="../../../assets/images/bg-video.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="video-desc">
+        <div class="vd-h1">Edyoos Provides Simple, Innovative Parking Management Solutions For All Industries</div>
+        <div class="vd-list">
+            <ul>
+                <li><a [routerLink]="['/pages/partnerships']">Partnerships</a></li>
+                <li><a [routerLink]="['/pages/what-we-offer']">What We Offer</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="demo-req-dv">
+    <div class="row no-gutters">
+        <div class="col-md-6">
+            <div class="reg-demo-img-left">
+                <div class="reg-demo-desc">
+                    <div class="reg-demo-desc-f1">See How Edyoos Can Increase Your Revenue</div>
+                    <div class="reg-demo-desc-f2">Request A Free Demo</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 py-5 px-4">
+            <div style="background-color: #000;border-radius: 15px;" class="my-4">
+            <h1 class="h1 font-weight-bold text-center py-2" style="font-size: 30px;color:#fff">
+                Request A Demo
+            </h1>
+            <form [formGroup]="emailUsFormGroup">
+              <div class="row">
+                <div class="col-12 col-md-10 mx-auto"> 
+                  <div class="form-content">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input class="form-control form-control-lg" type="text" formControlName="firstName"
+                            placeholder="First Name" required (blur)="logValidationErrors()" />
+                          <div *ngIf="formErrors.firstName" class="text-danger">
+                            {{formErrors.firstName}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control form-control-lg" formControlName="lastName"
+                            placeholder="Last Name" (blur)="logValidationErrors()" />
+                          <div *ngIf="formErrors.lastName" class="text-danger">
+                            {{formErrors.lastName}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input class="form-control form-control-lg" type="email" formControlName="email"
+                            placeholder="Email" (blur)="logValidationErrors()" />
+                          <div *ngIf="formErrors.email" class="text-danger">
+                            {{formErrors.email}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input class="form-control form-control-lg" type="text" formControlName="phone"
+                            placeholder="Phone" (blur)="logValidationErrors()" />
+                          <div *ngIf="formErrors.phone" class="text-danger">
+                            {{formErrors.phone}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <textarea placeholder="Business Name & Address" formControlName="message" id="exampleFormControlTextarea1"
+                          (blur)="logValidationErrors()" class="form-control" id="exampleFormControlTextarea1"
+                          rows="3"></textarea>
+                        <div *ngIf="formErrors.message" class="text-danger">
+                          {{formErrors.message}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group text-center mt-2">
+                      <button class="btn btn-login" (click)="sendMessage()" [disabled]="emailUsFormGroup.invalid">GET DEMO</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="part-img-svg-list">
+                <ul>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-1.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">TRUCK & TRAILER</div>
+                        </div>
+                        
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-2.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">TRUCKING</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-3.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">AIRPORTS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-4.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">BOAT SLIPS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-5.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">SHOPPING MALLS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-6.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">HEALTHCARE</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-7.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">EVENTS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-8.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">STADIUMS & VENUES</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-9.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">VALET</div>
+                        </div>
+                        
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-10.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">MUNICIPALITIES</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-11.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">HOTELS & RESORTS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-12.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">RELIGIOUS INSTITUTIONS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-13.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">TOURIST ATTRACTIONS</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-14.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">CRUISES</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-15.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">PARKING GARAGES</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="part-cir-svg-container">
+                            <svg id="svg_img_comp-kh58vq6w" class="_1jWBE"><defs><filter id="kennedy-comp-kh58vq6w" color-interpolation-filters="sRGB">
+<feComponentTransfer result="srcRGB"></feComponentTransfer>
+<feColorMatrix type="saturate" values="0"></feColorMatrix>
+<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-0.05"></feFuncR>
+<feFuncG type="linear" slope="1.1" intercept="-0.05"></feFuncG>
+<feFuncB type="linear" slope="1.1" intercept="-0.05"></feFuncB></feComponentTransfer>
+<feComponentTransfer><feFuncR type="linear" slope="0.9"></feFuncR><feFuncG type="linear" slope="0.9"></feFuncG><feFuncB type="linear" slope="0.9"></feFuncB></feComponentTransfer>
+<feComponentTransfer></feComponentTransfer>
+</filter></defs></svg><div class="_1ShVK"><svg ref="svgcomp-kh58vq6w" key="svgcomp-kh58vq6w" id="svgcomp-kh58vq6w" version="1.1" role="img" aria-label="nigel-tadyanehondo-GOD2mDNujuU-unsplash_"><defs><filter id="mask-comp-kh58vq6w-svg-bleach"><feColorMatrix type="matrix" values="0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 1 0"></feColorMatrix></filter>
+        <mask id="mask-comp-kh58vq6w">
+            <use filter="url(#mask-comp-kh58vq6w-svg-bleach)" id="mask-comp-kh58vq6w-svg-use" xlink:href="#mask-comp-kh58vq6w-svg" width="100%" height="100%" x="0" y="0"></use>
+        </mask>
+        <svg id="mask-comp-kh58vq6w-svg" preserveAspectRatio="none" data-bbox="20 20 160 160" viewBox="20 20 160 160" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape">
+<g>
+    <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z"></path>
+</g>
+</svg>
+</defs><image ref="image" key="image" data-type="image" width="100%" height="100%" preserveAspectRatio="none" mask="url(#mask-comp-kh58vq6w)" filter="url(#kennedy-comp-kh58vq6w)" data-svg-mask="mask-comp-kh58vq6w-svg" xlink:href="../../../assets/images/wws-16.jpg" style="width: 268px; height: 268px; object-fit: cover;"></image></svg></div>
+                            <div class="part-cir-desc">BUSINESSES</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

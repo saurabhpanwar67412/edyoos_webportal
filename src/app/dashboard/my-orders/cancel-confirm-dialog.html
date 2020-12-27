@@ -1,0 +1,27 @@
+<div class="container" *ngIf="data.confirmDialog">
+    <h2 mat-dialog-title>Are you sure..you want to cancel this order?</h2>
+    <mat-dialog-actions align="center">
+        <button mat-raised-button [mat-dialog-close]="{confirm:true}">Yes</button>
+        <button mat-raised-button [mat-dialog-close]="{confirm:false}" color="warn" cdkFocusInitial>No</button>
+    </mat-dialog-actions>
+</div>
+
+<div class="container" *ngIf="data.submitDialog">
+    <form>
+        <h3 mat-dialog-title> <strong>Confirm Cancel</strong></h3>
+        <div class="col-md-12">
+            <mat-form-field style=" width: 100%;">
+                <mat-label>Reason</mat-label>
+                <input matInput placeholder="Reason" [formControl]="reasonControl">
+            </mat-form-field>
+            
+        </div>
+      
+        <mat-dialog-actions align="center">
+            <button mat-raised-button [mat-dialog-close]="{submit:true,reason:reasonControl.value}">Confirm</button>
+            <button mat-raised-button cdkFocusInitial color="warn" 
+            [mat-dialog-close]="{submit:false}">No
+                thanks</button>
+        </mat-dialog-actions>
+    </form>
+</div>

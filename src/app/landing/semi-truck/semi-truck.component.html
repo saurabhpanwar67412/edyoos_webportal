@@ -1,0 +1,50 @@
+
+<div class="city-park-wrapper">
+  <app-nav-bar-new></app-nav-bar-new>
+  <div class="container">
+    <div class="head-container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="search-container">
+        <div class="font-poponis search-engine-heading">SEMI TRUCK PARKING</div>
+        <p class="mb-md-5 text-center f18" style="color: #4919db;">
+          Find Parking For Anything You Need To Tow
+        </p>
+        <div class="form-group mb-0" [formGroup]="searchForm" accept-charset="UTF-8" method="get">
+          <div class="input-group w-100">
+            <!-- <span class="input-group-btn col-3 px-1  mx-0">
+              <select id="select-control" [formControlName]="SEARCH_FROM_METADATA.vehicleCategory"
+                (change)="changeSearchMode($event.target.value)" class="form-control form-control-lg rounded"
+                name="args">
+                <option disabled [value]="null">Type of Parking</option>
+                <option *ngFor="let vehicleCategory of Mode | keyvalue" [value]="vehicleCategory.value">
+                  {{vehicleCategory.key}}</option>
+              </select>
+            </span> -->
+            <span class="input-group-btn col-sm-12 col-md-9 px-1 mx-0  mb-md-0 mb-2">
+              <input #searchBar type="text" name="search" id="search" [formControlName]="SEARCH_FROM_METADATA.searchBar"
+                placeholder="Search by Location or Address" type="text" class="form-control form-control-lg rounded"
+                name="search-text">
+            </span>
+            <span *ngIf="displayLength" style="max-width: 170px;" class="col-auto mx-0 px-1">
+              <input type="text" name="boat_length" id="boat_length" value=""
+                [formControlName]="SEARCH_FROM_METADATA.vehicleLength" numbersOnly
+                placeholder="{{ modePlaceholder }} length in ft" class="form-control form-control-lg" />
+            </span>
+            <span class="input-group-btn col-auto px-1 mx-md-0 mx-auto">
+              <button data-disable-with="Search" name="commit" [disabled]="searchForm.invalid" (click)="search()"
+                id="searchbtn" type="submit" class="form-control rounded btn btn-search px-5 py-3">
+                Search
+              </button> </span>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+  <div class="image-wrapper">
+    <img src="/assets/images/bg-car-couple.png" />
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,351 @@
+
+  <div class="f20 fmmedium bkclr1 mt-2">Reservation Details</div>
+  <div class="fl100 bk-box mb-2" *ngFor="let place of bookedPlaces; let i =index">
+    <div class="float-left">
+      <div class="f18 fmmedium bkclr1">
+        {{place?.propertyname || place?.propertyName}}
+        <span class="float-right" *ngIf="bookedPlaces.length>1">
+          <span (click)="removecartItem(i)" *ngIf="!hideRemoveCartItemBtn;"><img style="max-width: 20px;" src="./assets/images/trash.png"></span>
+          <span *ngIf="hideRemoveCartItemBtn" class="spinner-border text-danger" style="width: 1rem; height: 1rem;" role="status">
+            <span class="sr-only">Loading...</span>
+          </span>
+        </span>
+      </div>
+      <div class="f13 bkclr2 fmbook bkico-marker">{{place?.propertyGroupAddress}}</div>
+      <div *ngIf="pricingType.Monthly == place.pricingCode"><span class="highlight">This spot will be monthly recurring payment until cancel</span></div>
+    </div>
+    <div class="float-right text-right mob-bkprice-center">
+      <div class="fl100">
+        <span class="fcblue fmmedium f24" *ngIf="place.checkoutAmount==place.calculatedAmount">
+          {{place.calculatedAmount | currency}}
+        </span>
+        <span class="fcblue fmmedium f24" *ngIf="place.checkoutAmount!=place.calculatedAmount">
+          <s>{{place.calculatedAmount | currency}}</s>
+        </span><span class="f12 fmlight bkclr3 ml-1">Price {{pricingTypeText[place.pricingCode].replace('_',' ')}}</span>
+      </div>
+      <!-- <div class="fl100 mobile-hide"><a class="f12 bkclr4 fmbook" href="">VIEW LESS</a></div> -->
+    </div>
+    <div class="fl100 bk-date-box">
+      <ul>
+        <li>
+          <label class="f12 bkclr5 fmmedium d-block">Check-In Date & Time</label>
+          <span class="f18 fmmedium bkclr6" [ngClass]="{'text-danger':place.showDateError}">{{place?.searchFromDateTime | date :'short' }}</span>
+        </li>
+        <li class="bk-date-devider"></li>
+        <li>
+          <label class="f12 bkclr5 fmmedium d-block">Check-Out Date & Time</label>
+          <span class="f18 fmmedium bkclr6">{{place?.searchToDateTime | date :'short'}}</span>
+        </li>
+      </ul>
+      <span class="bk-edit-dv mobile-hide"><a (click)="changeDateClick(place)"><img src="../../../../assets/images/bkedit-icon.png" alt="" /></a></span>
+      <span class="mobile-show f12 fcblue"><a (click)="changeDateClick(place)">Change Date and Time</a></span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-12 d-none">
+      <span *ngIf="place.checkoutAmount!=place.calculatedAmount">{{place.checkoutAmount | currency}}</span>
+      <span *ngIf="feeAmountCalculate(place.fees, place.checkoutAmount).additionalFeeCount>0">
+        <span>Additional Fees({{feeAmountCalculate(place.fees, place.checkoutAmount).additionalFeeCount}}):</span>
+        <span>{{feeAmountCalculate(place.fees, place.checkoutAmount).extraAmount | currency}}</span>
+      </span>
+    </div>
+
+    <div class="col-12">
+      <!-- <div *ngIf="place.isSpotAvaliable">add_location</div> -->
+      <img *ngIf="!place.isSpotAvaliable" src="./assets/images/soldout.png" />
+    </div>
+    
+    <div *ngIf="place.changeDateClick">
+      <div class=" col-12 px-1 det-pop-form-holder">
+
+        <div class="det-pop-form fl100">
+          <ul class="row no-gutters">
+            <li class="col-xl-4 col-md-6 col-12 px-1 mb-0">
+              <!-- <input id="datetimepicker" type="text"  
+              #checkIn /> -->
+              <input type="text" [(ngModel)]="place.changeSearchFromDateTime" id="datetimepicker"
+              (onChange)="fromDateChange(place)"  id="datetimepicker" 
+              #checkIn >
+              <!-- <dp-date-picker placeholder="Check in" [(ngModel)]="place.changeSearchFromDateTime" [config]="config"
+                (onChange)="fromDateChange(place)" theme="dp-material" mode="daytime" #checkIn>
+              </dp-date-picker> -->
+            </li>
+            <li class="col-xl-4 col-md-6 col-12 px-1 mb-0">
+              <input placeholder="Check out" type="text"  [(ngModel)]="place.changesearchToDateTime"
+              (onChange)="toDateChange(place)"  id="todatetimepicker"
+              #checkOut >
+              <!-- <dp-date-picker placeholder="Check out" [(ngModel)]="place.changesearchToDateTime" [config]="config"
+                (onChange)="toDateChange(place)" theme="dp-material" mode="daytime" #checkOut>
+              </dp-date-picker> -->
+              <span class="text-danger" *ngIf="!place.isDateRangeValid">please select valid date</span>
+            </li>
+            <li class="col-1 d-xl-block d-none">&nbsp;</li>
+            <li class="col-xl-3 col-12">
+              <div class="text-right">
+                <button mat-button (click)="changeDateApply(place,i)" [disabled]="!place.isDateRangeValid"
+                  color="primary">Apply</button>
+                <button mat-button (click)="changeDateCancelClick(place)">Cancel</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    
+
+        
+  <!-- <div [ngClass]="{ 'col-8': (bookedPlaces.length>1), 'col-12': !(bookedPlaces.length>1) }"></div> -->
+  
+          
+          
+          
+         
+              
+              
+            
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-12 d-lg-none">
+      <app-orders></app-orders>
+    </div>
+  </div>
+  
+  <div class="clearfix"></div>
+  <div class="fl100 bk-box mb-2" *ngIf="!isGuestUser">
+    <div class="float-left">
+      <div class="f18 fmmedium bkclr1 fmmedium"><span class="bkclr7 ">Already a Edyoos Member</span><span class=
+      "f14 bkclr9"> or</span><span class="f14 bkclr8"> Want to be a Edyoos Member</span></div>
+      <div class="f13 bkclr10 fmbook">Save time & Login to get Discounts & Autofill your details</div>
+    </div>
+    <div class="float-right text-right">
+      <div class="fl100">
+        <ul class="bk-login-list fmmedium">
+          <li><a (click)="loginclick(mymodal,0)"  class="fcblue" >Login</a></li>
+          <li class="bk-login-divider"></li>
+          <li><a (click)="loginclick(mymodal,1)" >Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+<div *ngIf='isGuestUser'>
+  <div class="f20 fmmedium bkclr1 mt-2">Account Information</div>
+
+  <div class="fl100 bk-box ng-star-inserted mt-2">
+      <div class="row">
+      <div class="col-md-6 col-12">
+        <span class=" font-weight-bold">Email</span> : <span>{{guestUserEmail}}</span>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <span class=" font-weight-bold">Name </span> :<span>{{userName}}</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+  <div class="fl100 d-none">
+    <a (click)="hidedivpanel()">View Details</a>
+    <div class="detdv" *ngIf="hidediv">
+        Details
+    </div>
+  </div>
+        
+  <ng-template #mymodal let-modal>
+    
+        <div class="modal-body">
+          
+        <div class="lsmodal-dv fl100">
+          <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTabIndex">
+            <mat-tab label="LOGIN">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="ls-input-row">
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Email Address" formControlName="email" (blur)="logValidationErrors()"
+                    required>
+    
+                  <mat-error *ngIf="!loginForm?.get('email').valid &&
+                    loginForm?.get('email').touched && 
+                    loginForm?.get('email').hasError('email')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="!loginForm?.get('email').valid &&
+                  loginForm?.get('email').touched && 
+                  loginForm?.get('email').hasError('required')">
+                    Email is Required
+                  </mat-error>
+    
+                </mat-form-field>
+              </div>
+              <div class="ls-input-row">
+                <mat-form-field>
+                  <input matInput type="password" placeholder="Password" (blur)="logValidationErrors()"
+                    formControlName="password" required /><br />
+                  <mat-error>Passsword is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="ls-input-row">
+                <button class="ls-btn" type="submit"
+                    [disabled]="loginForm.invalid || loginButtonClicked">
+                    <span class="spinner-border spinner-border-sm" *ngIf="loginButtonClicked" role="status"
+                      aria-hidden="true"></span>
+                    {{loginButtonClicked?'Loading...':'CONTINUE'}}
+    
+                  </button>
+              </div>
+              <div class="text-danger text-center" *ngIf="loginError">{{loginError}}</div>
+              <div class="ls-fps bkclr15 f13 fmbook text-center fl100">
+                <a routerLink="" (click)="router.navigateByUrl('pages/forgetpassword')">Forgot Password?</a>
+              </div>
+              <div class="ls-opt-hdr f12 bkclr16 text-center fl100">
+                <span>Or Login/Signup With</span>
+              </div>
+              <div class="ls-opt-list fmmedium fl100 f12">
+                <ul>
+                  <li><a href="" class="ls-facebook"><img src="../../../../assets/images/ls-icofb.png" alt=""/>Login with Facebook</a></li>
+                  <li><a href="" class="ls-google"><img src="../../../../assets/images/ls-icogoogle.png" alt=""/>Login with Google</a></li>
+                </ul>
+              </div>
+               </form>
+            </mat-tab>
+           
+            
+            <mat-tab label="SIGN UP">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit1()">
+							<div class="ls-input-row">
+								<label>Name</label>
+								<div class="ls-input-group">
+									 <input class="form-control form-control-lg" type="text"
+                                                placeholder="First Name" (blur)="logLoginValidationErrors()" required
+                                                formControlName="firstName" (blur)="logLoginValidationErrors()" />
+                                            <div *ngIf="formloginErrors.firstName" class="text-danger">
+                                                {{formloginErrors.firstName}}
+                                            </div>
+									<input type="text" class="form-control form-control-lg"
+                                                placeholder="Last Name" formControlName="lastName" required
+                                                (blur)="logLoginValidationErrors()" (blur)="logLoginValidationErrors()" />
+                                            <div *ngIf="formloginErrors.lastName" class="text-danger">
+                                                {{formloginErrors.lastName}}
+                                            </div>
+								</div>
+							</div>
+							<div class="ls-input-row">
+								<label>Email Id</label>
+							 <input class="form-control form-control-lg" type="text"
+                                                placeholder="Email Address" formControlName="email" required
+                                                (blur)="logLoginValidationErrors()" (blur)="logLoginValidationErrors()" />
+                                            <div *ngIf="formloginErrors.email" class="text-danger">
+                                                {{formloginErrors.email}}
+                                            </div>
+							</div>
+							<div class="ls-input-row" formGroupName="passwordGroup">
+								<label>Password</label>
+								             <input class="form-control form-control-lg" type="password"
+                                                placeholder="Password" formControlName="password" required
+                                                (blur)="logLoginValidationErrors()" />
+
+                                            <div *ngIf="formloginErrors.password" class="text-danger">
+                                                {{formloginErrors.password}}
+                                            </div>
+							</div>
+							<div class="ls-input-row" formGroupName="passwordGroup">
+								<label>Confirm Password</label>
+								 <input class="form-control form-control-lg" type="password"
+                                                formControlName="passwordConfirmation" required
+                                                (blur)="logLoginValidationErrors()" placeholder="Confirm Password" />
+                                            <div *ngIf="(formloginErrors.passwordConfirmation || formloginErrors.passwordGroup)"
+                                                class="text-danger">
+                                                {{formloginErrors.passwordConfirmation ? formloginErrors.passwordConfirmation
+                                        : formloginErrors.passwordGroup}}
+                                            </div>
+							</div>
+							<div class="ls-nesub bkclr15 f13 fmbook fl100 mb-2">
+							 <input type="checkbox" value="terms" (click)="marksAsTouched()"
+                                        formControlName="iAgree" id="signchekagree" class="mr-2" />
+                                    <label for="signchekagree">I agree to
+                                        <a class="btn-link" (click)="openPrivacyNewWindow()"> Privacy Notice</a>
+                                        and
+                                        <a class="btn-link" (click)="openTermsNewWindow()">Terms & Conditions </a>
+                                    </label>
+
+                                    <div class="text-danger" *ngIf="formloginErrors.iAgree">
+                                        {{formloginErrors.iAgree}}
+                                    </div>
+							</div>
+							<div class="bkclr15 f13 fmbook fl100 mb-3">
+								<input type="checkbox" class="mr-2 mb-2" formControlName="subscribeNewsLetter"
+                                        value="subscribe" id="rememberMe" />
+                                    <label for="rememberMe">Subscribe to newsletter</label></div>
+							<div class="ls-input-row">
+							    <button class="btn ls-btn" [disabled]="registerForm.invalid || submitBtnClicked">
+                                        <span class="spinner-border spinner-border-sm" *ngIf="submitBtnClicked"
+                                            role="status" aria-hidden="true"></span>
+                                        {{submitBtnClicked?'Loading...':'Sign Up'}}
+
+                                    </button>
+							</div>
+							<div class="ls-opt-hdr f12 bkclr16 text-center fl100">
+								<span>Or Login/Signup With</span>
+							</div>
+							<div class="ls-opt-list fmmedium fl100 f12">
+								<ul>
+									<li><a href="" class="ls-facebook"><img src="../../../../assets/images/ls-icofb.png" alt=""/>Login with Facebook</a></li>
+									<li><a href="" class="ls-google"><img src="../../../../assets/images/ls-icogoogle.png" alt=""/>Login with Google</a></li>
+								</ul>
+							</div>
+              </form>
+              </mat-tab>
+          
+          </mat-tab-group>
+        </div>
+      
+        </div>
+    <!-- <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is example from ItSolutionStuff.com
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div> -->
+  </ng-template>
+
+<!-- <div *ngIf=" !isGuestUserClicked">
+  
+  
+    <div [hidden]='isGuestUser'>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
+        <div class="col-12 d-flex align-items-center pl-0">
+          
+          <div class="text-md-right pt-md-0 col-auto">
+            <button class="cart-btn d-md-inline-block d-block col-12 col-md-auto" (click)="nextStep()">
+              Check out as guest
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+    <div class="row" *ngIf='isGuestUser'>
+
+      <div class="col-md-6 col-12">
+        <span class=" font-weight-bold">Email</span> : <span>{{guestUserEmail}}</span>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <span class=" font-weight-bold">Name </span> :<span>{{userName}}</span>
+      </div>
+    </div>
+  
+</div> -->
+<!-- <div *ngIf="isGuestUserClicked" class="text-right">
+  <a class="btn-link text-danger" (click)="cancel()"> Back to Login</a>
+</div> -->

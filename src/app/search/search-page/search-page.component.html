@@ -1,0 +1,829 @@
+<div class="fixed-top" style="z-index: 1000;" [formGroup]="searchForm">
+  <div class="nav-st">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+              <!-- LOGO Starts -->
+              <div class="col-auto ml-0 pr-0 pl-0 order-1">
+                <div class="row no-gutters align-items-center">
+                  <img src="assets/images/edyoos-logo.svg" class="img-logo" />
+                  <a class="navbar-brand pl-2" href="#">Edyoos</a>
+                </div>
+              </div>
+              <!-- LOGO Ends -->
+              <!-- nav search -->
+              <div class="col-lg-6 col-md-7 mx-lg-0 mx-md-auto mx-0 col-12 px-0 mx-0 order-3 order-md-2">
+                <div class="w-100 p-0">
+                  <div action="" accept-charset="UTF-8" method="get">
+                    <div class="input-group search-group">
+                      <div class="selectWrapperPlaceholder">
+                        <select class="selectWrapper borderless select-center" name="vehicle" id="vehicle"
+                          [formControlName]="SEARCH_FORM_METADATA.mode" (change)="changeSearchMode($event['target']?.value)">
+                          <ng-container *ngFor="let vehicleCategory of Mode | enumToArray">
+                            <option *ngIf="Mode[vehicleCategory]!='seaplane' && Mode[vehicleCategory]!='helicopter'"
+                              [value]="Mode[vehicleCategory]">
+                              {{vehicleCategory.replace('_',' ').replace('And_','&')}}</option>
+                          </ng-container>
+                        </select>
+                      </div>
+                      <input #searchBar type="text" name="search" id="search" [formControlName]="SEARCH_FORM_METADATA.searchBar"
+                        placeholder="Search for parking lot" class="form-control borderless" />
+                      <input *ngIf="displayLength" type="text" name="boat_length" id="boat_length" maxlength="3" numbersOnly
+                        [formControlName]="SEARCH_FORM_METADATA.vehicleLength" value="" placeholder="length in ft"
+                        class="form-control col-3 borderless" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end nav search -->
+              <div class="ml-auto col-auto order-md-3 order-2" id="navbarText">
+                <ul class="ml-auto d-flex align-items-center nav-icon navbar-nav">
+                  <li class="nav-link" #bagIconElement style="position: relative;" (click)="openCartDetails()">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span class="notification" *ngIf="ordersCount > 0">{{ ordersCount }}</span>
+                  </li>
+                  <li class="nav-link">
+                    <a [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                      <button (click)="router.navigateByUrl('pages/login')" *ngIf="!isLoggedIn" mat-menu-item>
+                        <span>Sign In</span>
+                      </button>
+                      <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/dashboard')" mat-menu-item>
+                        <span>Dashboard</span>
+                      </button>
+                      <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/myOrders')" mat-menu-item>
+                        <span>My Orders</span>
+                      </button>
+                      <button *ngIf="isLoggedIn" mat-menu-item>
+                        <span>Payment</span>
+                      </button>
+                      <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('profile')" mat-menu-item>
+                        <span>Profile</span>
+                      </button>
+                      <button (click)="router.navigateByUrl('pages/register')" *ngIf="!isLoggedIn" mat-menu-item>
+                        <span>Sign Up</span>
+                      </button>
+                      <button *ngIf="isLoggedIn" (click)="signOut()" mat-menu-item>
+                        <span>Sign Out</span>
+                      </button>
+                    </mat-menu>
+                  </li>
+                </ul>
+              </div>
+              <mat-card class="cart-details" [style]="'top:'+cartTopStyle">
+                <div #cartDivElement>
+                  <div *ngIf="ordersCount==0" class="text-center" style="margin-top: 100px;">
+                    <h3>There is no items available in the cart</h3>
+                  </div>
+          
+                  <div class="text-center" *ngIf="showCartSpinner">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+          
+                  <div *ngIf="ordersCount>0 && !showCartSpinner" class="cart-font">
+                    <div class="text-center cart-title">
+                      <strong>Order Summary</strong> ({{ordersCount}} Items)
+                    </div>
+                    <hr class="mb-0 mt-md-1 mt-sm-1 my-2" />
+                    <mat-card-content>
+                      <div class="row mt-md-4 no-gutters flex-nowrap"
+                        *ngFor="let propertyGroup of cartPropertyGroup; let i = index">
+                        <div class="col-md-12">
+                          <div class="row no-gutters align-items-center  flex-nowrap">
+                            <div class="col-6">
+                              <strong *ngIf="propertyGroup.propertyName"
+                                tooltip="{{ propertyGroup.propertyName }}">{{ commonService.stringSlicer( propertyGroup.propertyName,20)}}</strong>
+          
+                              <strong *ngIf="propertyGroup.propertyname"
+                                tooltip="{{ propertyGroup.propertyname }}">{{ commonService.stringSlicer(propertyGroup.propertyname,20)}}</strong>
+                            </div>
+                            <div class="col-4 font-weight-bold">
+                              {{propertyGroup.calculatedAmount | currency}}
+                            </div>
+                            <div class="col-2 pl-md-0 pl-2 ">
+                              <span (click)="deletePlace(i)" [hidden]="hideDeleteIcon" #deleteIconElement
+                                style="cursor: pointer;font-size: 18px;" class="text-danger ml-2 mt-1 float-md-right">
+                                <img style="max-width: 20px;" src="./assets/images/trash.png">
+                              </span>
+                              <span *ngIf="hideDeleteIcon" class="spinner-border text-danger mt-1 float-md-right"
+                                style="width: 1rem; height: 1rem;" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row no-gutters align-items-center my-3">
+                            <div class="col-md-6 col-6">
+                              <span class="det-date-yy">{{propertyGroup?.searchFromDateTime| date:'short'}}</span>
+                            </div>
+                            <div class="col-md-6 col-6">
+                              <span class="det-date-yy">{{propertyGroup?.searchToDateTime| date:'short'}}</span>
+                            </div>
+          
+                            <div *ngIf="!(propertyGroup?.isSpotAvaliable)" class="col-md-12 text-center pt-2"
+                              style="font-size:11px;">
+                              <span class="text-danger">{{spotNotAvailableErrorMessage}}</span>
+                            </div>
+          
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="mb-0 mt-md-1 my-2" />
+                      <div class="row mt-md-3 no-gutters align-items-center">
+                        <div class="col-md-6 col-6">
+                          <span class="font-weight-bold">Total ({{ordersCount}} Items) :</span>
+                        </div>
+                        <div class="col-md-6 col-6 font-weight-bold text-primary ">
+                          {{total | currency}}
+                        </div>
+                      </div>
+                      <hr class="mb-0" />
+                    </mat-card-content>
+          
+                    <mat-card-actions class="text-center text-white my-0">
+                      <button mat-raised-button color="warn" class="text-white" (click)="reserveNow()">Proceed
+                        to Checkout</button>
+                    </mat-card-actions>
+                  </div>
+                </div>
+              </mat-card>
+            </nav>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <div class="serach-date-form-container py-1">
+    <div class="container">
+      <div class="row" [formGroup]="dateForm">
+        <div class="col-xl-3 col-lg-3 col-md-5 col-12">
+          <label class="f12 d-block fcl3">Check In</label>
+          <input id="datetimepicker" type="text" [formControlName]="SEARCH_FORM_METADATA.fromDate"
+          (onChange)="fromDateChange($event)" theme="dp-material"  
+          #checkIn >
+          <!-- <dp-date-picker placeholder="Check in" [config]="config" [formControlName]="SEARCH_FORM_METADATA.fromDate"
+            (onChange)="fromDateChange($event)" theme="dp-material" mode="daytime" [displayDate]="fromDisplayDate"
+            #checkIn></dp-date-picker> -->
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-5 col-12">
+          <label class="f12 d-block fcl3">Check Out</label>
+          <input id="todatetimepicker" type="text"  [formControlName]="SEARCH_FORM_METADATA.toDate"
+          (onChange)="toDateChange($event)" theme="dp-material" 
+          #checkOut >
+          <!-- <dp-date-picker placeholder="Check out" [config]="config" [formControlName]="SEARCH_FORM_METADATA.toDate"
+            (onChange)="toDateChange($event)" theme="dp-material" mode="daytime" [displayDate]="toDisplayDate"
+            #checkOut>
+          </dp-date-picker> -->
+
+          <span returnedValueType="Moment" style="color: red; font-size: 9px; display: block;"
+            *ngIf="!isDateRangeValid">
+            Check-out Date Cannot be Before Check-in Date</span>
+        </div>
+        <div class="offset-md-2 d-lg-none  d-block">
+          &nbsp;
+        </div>
+        <div class="col-auto mt-md-0 mt-1 px-0">
+          <label class="f12 d-md-block d-none">&nbsp;</label>
+          <button (click)="search()" class="btn-green-search"
+            [disabled]="!isDateRangeValid || this.searchForm.invalid || searchBtnDisabled">
+            <span class="spinner-border spinner-border-sm" *ngIf="searchBtnDisabled" role="status"
+              aria-hidden="true"></span>
+            {{searchBtnDisabled?'Loading...':'Search'}}
+
+          </button>
+        </div>
+        <div class="col-auto mt-md-4 mt-2 pt-md-1" *ngIf="displayedPlaces.length>0">
+          <div class="red-pg-sort">
+            <span>Sort by:</span>
+            <ul>
+              <li (click)="sort(SortMethodEnum.closest)" [ngClass]="{'active':sortMethod==SortMethodEnum.closest}">
+                Closest
+              </li>
+              <li (click)="sort(SortMethodEnum.cheapest)" [ngClass]="{'active':sortMethod==SortMethodEnum.cheapest}">
+                Price - Low to High</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-auto f12 mt-md-3 mt-2 pl-0 map-tog" *ngIf="displayedPlaces.length>0">
+            <span class="f14 mapvhdr">Map: </span><span class="mapviewclr1">HIDE</span>
+            <mat-slide-toggle class="mt-xl-2" [checked]="true" (click)="toggleDisplay()">
+            </mat-slide-toggle>&nbsp;<span class="mapviewclr2">VIEW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PAGE CONTAINER STARTS -->
+<div class="container-fluid res-pg-resdv">
+  <div class="row">
+    <div class="map-warrper col order-1 order-md-2" *ngIf="!isHidden" [hidden]="displayedPlaces.length==0" id="map"></div>
+    <div [ngClass]="{ 'col-md-7': !isHidden, 'col-12': isHidden }" class="order-md-1 order-2 scrollingevt">
+      <ng-container *ngIf="placesLoaded">
+        <div class="result-scroll">
+          <div class="row no-gutters">
+            <!-- <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode]; let i = index">
+              <div [ngClass]="{ 'col-md-12': !isHidden, 'col-md-6': isHidden }"
+                *ngIf="vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.city.toString() && i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-city.png" alt="" />
+                </div>
+              </div>
+
+              <div [ngClass]="{ 'col-md-12': !isHidden, 'col-md-6': isHidden }"
+                *ngIf="vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.airplane.toString() && i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-airport.png" alt="" />
+                </div>
+              </div>
+
+              <div [ngClass]="{ 'col-md-12': !isHidden, 'col-md-6': isHidden }"
+                *ngIf="vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.semitruck.toString() && i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-truck.png" alt="" />
+                </div>
+              </div>
+
+              <div [ngClass]="{ 'col-md-12': !isHidden, 'col-md-6': isHidden }"
+                *ngIf="vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.truckandtrailer.toString() && i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-truck.png" alt="" />
+                </div>
+              </div>
+
+              <div [ngClass]="{ 'col-md-12': !isHidden, 'col-md-6': isHidden }"
+                *ngIf="vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.boat.toString() && i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-boat.png" alt="" />
+                </div>
+              </div>
+
+            </ng-container> -->
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode]; let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+
+
+
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <!-- City Start-->
+
+            <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.city.toString()?null:vehicleCategoryEnum.city.toString(); let i = index">
+              <div [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }" *ngIf="i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-city.png"  alt="" />
+                </div>
+              </div>
+            </ng-container>
+
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.city.toString()?null:vehicleCategoryEnum.city.toString(); let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- City End -->
+
+            <!-- Airport Start -->
+            <div class="row no-gutters">
+            <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.airplane.toString()?null:vehicleCategoryEnum.airplane.toString(); let i = index">
+              <div [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }" *ngIf="i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-airport.png"  alt="" />
+                </div>
+              </div>
+            </ng-container>
+
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.airplane.toString()?null:vehicleCategoryEnum.airplane.toString(); let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- Airport End -->
+
+            <!-- Semi Truck Start -->
+            <div class="row no-gutters"> 
+            <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.semitruck.toString()?null:vehicleCategoryEnum.semitruck.toString(); let i = index">
+              <div [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }" *ngIf="i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-truck.png"  alt="" />
+                </div>
+              </div>
+            </ng-container>
+
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.semitruck.toString()?null:vehicleCategoryEnum.semitruck.toString(); let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            </div>
+            <!-- Semi Truck End -->
+
+            <!-- Truck And Trailer Start -->
+            <div class="row no-gutters"> 
+            <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.truckandtrailer.toString()?null:vehicleCategoryEnum.truckandtrailer.toString(); let i = index">
+              <div [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }" *ngIf="i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-truck.png"  alt="" />
+                </div>
+              </div>
+            </ng-container>
+
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.truckandtrailer.toString()?null:vehicleCategoryEnum.truckandtrailer.toString(); let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            </div>
+            <!-- Truck And Trailer End -->
+
+            <!-- Boat Start -->
+            <div class="row no-gutters"> 
+            <ng-container
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.boat.toString()?null:vehicleCategoryEnum.boat.toString(); let i = index">
+              <div [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }" *ngIf="i==0">
+                <div class="result-grid-nearbyimg">
+                  <img src="../../../assets/images/nearby-boat.png"  alt="" />
+                </div>
+              </div>
+            </ng-container>
+
+            <div
+              *ngFor="let place of displayedPlaces | vehiclefilter:vehicleCategoryEnum[selectedMode].toString()==vehicleCategoryEnum.boat.toString()?null:vehicleCategoryEnum.boat.toString(); let i = index"
+              [ngClass]="{ 'col-md-6': !isHidden, 'col-md-4': isHidden }">
+              <div (mouseover)="changeSelectedMarker(i,place)" (mouseleave)="changeMarkerIcon()"
+                [id]="place.propertyGroupID" class="result-grid">
+                <div class="park-img-grid">
+                  <img *ngIf="place?.files" [src]="place.files[0].filePath" alt="parking image" id="plan"
+                    class="park-mimg" />
+                  <div class="park-addbag-grid" *ngIf="place.isSpotAvaliable">
+                    <span class="addbag-link" [tooltip]="'Add to Bag'" *ngIf="!hideAddCartBtn"
+                      (click)="addToCart(place)"><img src="assets/images/addbag.png" />Add to <span
+                        class="f12">Bag</span>
+                    </span>
+                    <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+                    <span *ngIf="hideAddCartBtn" class="spinner-border text-primary"
+                      style="width: 2rem; height: 2rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="park-det-grid">
+                  <div class="f16 park-hdr-sline" tooltip="{{ place.propertyname}}">
+                    {{ commonService.stringSlicer(place.propertyname,40)}}</div>
+                    <div class="fl100">
+                      <div class="park-det-adrs">{{ place.distance}} miles away</div>
+                    
+                    </div>
+                  <div class="park-det-left">
+                    <div class="park-det-ame-list">
+                      <ul>
+                        <li *ngFor="let subCategory of place.amenities?.split(',');let i=index">
+                          <span class="ameimg" [tooltip]="place.amenities?.split(',')[i]">
+                            <img
+                              src="{{imageurl}}/{{subCategory.trim().replace(' ','').replace('/','').toLowerCase() | removewhitespaces}}.png"
+                              alt="" />
+                          </span>
+                        </li>
+                        <li class="mb-2" *ngIf="!place.amenities?.split(',')">
+                          &nbsp;
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="park-det-view">
+                      <a class="view-btn" (click)="goToPlace(place)">View details</a>
+                    </div>
+                  </div>
+                  <div class="park-det-right">
+                    <label class="f12 park-prhigh mb-3 d-none">Very Good Place</label>
+                    <span class="park-pridesc f12"><span class="f10 fcblue" *ngIf="place.pricingCode">$
+                        {{place.pricingAmount}}</span> {{pricingType[place.pricingCode].replace('_',' ')}}</span>
+                    <div class="park-det-price">
+
+                      <button class="btn-trans" *ngIf="place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        (click)="getAvailableSpots(place)">
+                        <span class="f14">Book Now</span><span class="f18"> $ </span><span
+                          class="park-det-price-fig f18">{{place.calculatedAmount}}</span>
+                      </button>
+                      <button *ngIf="!place.isSpotAvaliable" [disabled]="!place.isSpotAvaliable"
+                        class="btn-trans">Sold Out</button>
+                    </div>
+                  </div>
+                  <div *ngIf="!place.isDateAvaliable && place.isSpotAvaliable" class="text-danger">
+                    <strong>{{place.datetimeRangeResponse}}</strong>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            </div>
+            <!-- Boat End -->
+
+          
+          <div *ngIf="hideExtra" class="col-12 text-center">
+            <button id="showallclick" class="btn place-btn mb-4 mt-3" (click)="showAllPlaces()">
+              Show All ({{ placesCount }})
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <div class="fl100">
+
+        <div class="text-center col-md-12 col-lg-12 mt-5" *ngIf="displayedPlaces.length==0 && !httpError">
+          <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;margin-top: 10rem"
+            role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+
+        <div *ngIf="httpError" class="error-wrapper">
+          <section class="error-panel p-lg-5 p-sm-2 p-1">
+            <p class="p error-heading text-center">
+              <span class="text-uppercase font-weight-bold">
+                WE'RE SORRY
+              </span>
+            </p>
+            <p class="error-content px-lg-5 px-sm-2 p-1 py-2 ">
+              {{httpError}}
+            </p>
+            <div class="mb-2 text-center">
+              <button routerLink="/pages/contact" class="btn-green-search px-lg-4">
+                Contact Us </button></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- For Development -->
+  <div class="row" style="display: none;">
+    <div class="col-md-6">
+      <div class="result-grid-nearbyimg">
+        <img src="../../../assets/images/nearby-truck.png" alt="" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="result-grid">
+        <div class="park-img-grid">
+          <img src="../../../assets/images/res-img.jpg" />
+          <div class="park-addbag-grid">
+            <span class="addbag-link"><img src="../../../assets/images/addbag.png" />Add to Bag</span>
+            <span class="fav-link"><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></span>
+          </div>
+        </div>
+        <div class="park-det-grid">
+          <div class="f18 mb-2">City Max Olas Blvd - Garage</div>
+          <div class="park-det-left">
+            <div class="park-det-adrs">5.8 miles away</div>
+            <div class="park-det-ame-list mb-2">
+              <ul>
+                <li><img src="../../../assets/images/Ev-Charging-Station.png" alt="" /></li>
+                <li><img src="../../../assets/images/Handicap-Accessible.png" alt="" /></li>
+                <li><img src="../../../assets/images/Security-Camera_s.png" alt="" /></li>
+                <li><img src="../../../assets/images/Car-Wash.png" alt="" /></li>
+              </ul>
+            </div>
+            <div class="park-det-view">
+              <button class="view-btn">View Details</button>
+            </div>
+          </div>
+          <div class="park-det-right">
+            <label class="f12 park-prhigh mb-3">Very Good Place</label>
+            <span class="park-pridesc f12">Price per day</span>
+            <div class="park-det-price"><span class="f14">Book Now</span><span class="f18">$</span><span
+                class="park-det-price-fig f18">67.50</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE CONTAINER ENDS -->

@@ -1,0 +1,249 @@
+#CONTACT_US {
+  // position: absolute;
+  // left: 614px;
+  // top: 2281px;
+  overflow: visible;
+  // width: 154px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  color: rgba(105, 160, 223, 1);
+}
+
+.text-center {
+  text-align: center;
+  color: #3489eb;
+}
+
+.need-help {
+  font-weight: bold;
+  text-align: end;
+}
+
+.btn-footer {
+  border-radius: 30px;
+  // border: 2px solid #175785;
+  background-color: #226ec5;
+  color: #ffffff;
+}
+.btn-footer:hover {
+  // border: 2px solid #175785;
+  color: #f4f4f4;
+  background-color: #175785;
+}
+
+.footer-bg {
+  // background-image: url("/assets/images/footer-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 220px;
+  color: black;
+}
+
+.footer-bg a {
+  color: black;
+}
+
+.text-pad {
+  padding: 5rem 0 3rem 7rem;
+}
+
+.footer-item {
+  width: 15%;
+  text-align: center;
+}
+
+.footer-item-10 {
+  width: 10%;
+}
+
+.footer-item-2 {
+  width: 2%;
+}
+
+.footer-item-3 {
+  width: 3%;
+}
+
+.footer-item-5 {
+  width: 5%;
+}
+.footer-item-8 {
+  width: 8%;
+}
+
+.copyright {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.table-first {
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+.table-second {
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+.border-sides {
+  border-right: 2px solid white;
+  border-left: 2px solid white;
+}
+.border-right-side {
+  border-right: 2px solid white;
+}
+.table-middle {
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+
+.table-last {
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .text-pad {
+    padding: 8rem 0 3rem 0;
+  }
+
+  .footer-item {
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    background-color: rgb(41, 85, 135);
+  }
+  .lines {
+    background: rgb(255, 255, 255) none repeat scroll 0 0;
+    display: block;
+    height: 1px;
+    width: 70%;
+    margin: auto;
+  }
+  .footer-item-10 {
+    width: 0%;
+  }
+  // .footer-item-15 {
+  //   width: 100%;
+  // }
+  .footer-item-8 {
+    width: 0%;
+  }
+  .footer-bg {
+    background-image: url("/assets/images/footer-bg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 220px;
+  }
+  // .appended-bg {
+  //   background-color: rgb(41, 85, 135);
+  // }
+  // .appended-bg-b {
+  //   background-color: rgb(41, 85, 135);
+  //   padding-bottom: 10px;
+  // }
+
+  .sm-txt {
+    font-size: 14;
+  }
+
+  .copyright {
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+
+  .table-first {
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid white;
+    background-color: rgb(41, 85, 135);
+  }
+  .table-second {
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid white;
+    border-left: 0;
+    border-right: 0;
+    background-color: rgb(41, 85, 135);
+  }
+  .table-middle {
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid white;
+    background-color: rgb(41, 85, 135);
+  }
+  .table-last {
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid white;
+    background-color: rgb(41, 85, 135);
+  }
+
+  .border-sides {
+    border-right: 0;
+    border-left: 0;
+  }
+  .border-right-side {
+    border-right: 0;
+  }
+}
+
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {...}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {...}
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {...}
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {...}
+
+.col-1hf {
+  width: 20.83%;
+}
+.col-hf {
+  width: 12.5%;
+}
+.footer-logo {
+  width: 106px;
+  margin-top: -1rem;
+  background: transparent;
+}
+
+.text-decoration-underline{
+  text-decoration: underline;
+}
+.footer-link {
+  color: #4919db !important;
+  // font-family: Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  &:hover{
+    color:rgba(76, 218, 100) !important;
+  }
+}
+.text-active{
+ color:rgba(76, 218, 100) !important;
+}
+.up-arrow-icon{
+  position: fixed;
+  left: 0;
+  margin-left: 80px;
+  bottom: 50px;
+  cursor: pointer;
+}

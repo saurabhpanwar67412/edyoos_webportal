@@ -1,0 +1,80 @@
+.nav-st {
+    background-color: #226ec5;
+  }
+  .btn-custom {
+    border-radius: 30px;
+    border: 2px solid #175785;
+    background-color: #175785;
+    color: #f4f4f4;
+  }
+  .btn-custom:hover {
+    border: 2px solid #175785;
+    color: #175785;
+    background-color: #f4f4f4;
+  }
+  
+  .cart {
+    font-size: 36px;
+    cursor: pointer;
+  }
+  
+  .notification {
+    font-size: 10px;
+    top: 0;
+    right: 0.1rem;
+    padding: 0px 6px;
+    position: absolute;
+    background-color: #ef6161;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: white;
+  }
+  
+  .nav-bar-toggled {
+    text-align: center;
+    display: inline-block;
+    float: none;
+    .notification {
+      top: auto;
+      right: auto;
+    }
+  }
+  
+  .dashboard-icon {
+    cursor: pointer;
+  }
+  
+  .cart-details {
+    max-width: 400px;
+      position: fixed;
+      z-index: 9991;
+      right: 49px;
+      box-shadow: -10px 20px 20px 0 rgba(0,0,0,.07);
+      transition: all .7 ease-in 0s;
+      min-height: 300px;
+      min-width:400px;
+  }
+  .cart-font{
+    width: 100%;
+    font-size: 14px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: .36px;
+    color: black;
+    position: relative;
+  }
+  .cart-title{
+    font-size: 17px;
+  }
+  
+   a{
+    color: #007bff;
+      text-decoration: none;
+      background-color: transparent;
+  }
+   a:hover{
+    text-decoration: underline;
+   cursor: pointer;
+   }
+  

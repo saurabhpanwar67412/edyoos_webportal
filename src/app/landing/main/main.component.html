@@ -1,0 +1,145 @@
+<!-- <app-nav-bar></app-nav-bar> -->
+<!-- Follow bar -->
+<!-- <div class="follow">
+  <div style="display: inline-block;">
+    <p>Follow us &nbsp;----</p>
+  </div> -->
+<!-- <a class="my-1" href="https://www.facebook.com/edyoosparking/"> <img src="/assets/images/facebook-icon.png" /></a>
+  <a class="my-1" href="https://twitter.com/EdyoosParking"> <img src="/assets/images/twitter-icon.png" /></a>
+  <a class="my-1" href="https://www.instagram.com/accounts/login/?next=/edyoos/"> <img style="max-width: 20px;"
+      src="/assets/images/instagram.png" /></a>
+  <a class="my-1"
+    href="https://www.linkedin.com/authwall?trk=ripf&trkInfo=AQGaUkwfoojPGwAAAXTnsn9IQ5emktNXOn3fTBzb3DQkCLFxQQDqCBaIroTiz-HaxjZ9EHxYtQpk9hLkQ7ZGDPuhkL96p4IoOVgIoxaCCMABwS8uB4AeO5ynIRo1hg6zp-ZcYx8=&originalReferer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fedyoos-inc%2F">
+    <img style="max-width: 20px;" src="/assets/images/linkedin.png" /></a>
+</div> -->
+<!-- End-Follow bar -->
+<div class="landing-page-wrapper">
+  <app-nav-bar-new></app-nav-bar-new>
+  <div class="container">
+    <div class="head-container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-container">
+            <div class="font-poponis search-engine-heading">THE SMARTER WAY TO PARK</div>
+            <div class="form-group mb-0" [formGroup]="searchForm" accept-charset="UTF-8" method="get">
+              <div class="input-group w-100">
+
+                <span class="input-group-btn col-md-1 text-center mb-2">
+                  <img src="../../../assets/images/location_image.png" (click)="getGeoLocation()" class="location_image" alt="location image">
+                </span>
+
+                <span class="input-group-btn col-md-3 col-sm-6 col-12 px-1  mx-md-0 mx-auto mb-md-0 mb-2">
+                  <select id="select-control" [formControlName]="SEARCH_FROM_METADATA.vehicleCategory"
+                    (change)="changeSearchMode($event.target.value)"
+                    class="form-control form-control-lg rounded  font-adjust" name="args">
+                    <option disabled selected hidden [value]="null">Type of Parking</option>
+                    <ng-container *ngFor="let vehicleCategory of Mode | enumToArray">
+                      <option *ngIf="Mode[vehicleCategory]!='seaplane' && Mode[vehicleCategory]!='helicopter'"
+                        [value]="Mode[vehicleCategory]">
+                        {{vehicleCategory.replace('_',' ').replace('And_','&')}}</option>
+                    </ng-container>
+                  </select>
+                </span>
+                <span class="input-group-btn col-md col-sm-10 col-12 px-1 mx-md-0 mx-auto mb-md-0 mb-2">
+                  <input #searchBar type="text" name="search" id="search"
+                    [formControlName]="SEARCH_FROM_METADATA.searchBar" placeholder="Search by Location Or Address"
+                    type="text" class="form-control form-control-lg rounded font-adjust" name="search-text">
+                </span>
+                <span *ngIf="displayLength" style="max-width: 170px;"
+                  class="col-md-auto col-sm-6 col-12 mx-md-0  mx-auto px-1 mb-md-0 mb-2">
+                  <input type="text" name="boat_length" id="boat_length" value=""
+                    [formControlName]="SEARCH_FROM_METADATA.vehicleLength" numbersOnly
+                    placeholder="{{ modePlaceholder }} length in ft" maxlength="3"
+                    class="form-control form-control-lg font-adjust" />
+                </span>
+                <span class="input-group-btn col-auto mx-md-0 mx-auto px-1">
+                  <button data-disable-with="Search" name="commit" [disabled]="searchForm.invalid" (click)="search()"
+                    id="searchbtn" type="submit" class="form-control rounded btn btn-search px-5 py-3">
+                    Search
+                  </button> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-container">
+
+    <!-- <img src="/assets/images/ship_2.png" id="boat" />
+    <img src="/assets/images/car1.png" id="car" />
+    <img src="/assets/images/truck-bg.png" id="truck" />
+    <img src="/assets/images/helicopter.png" id="helicopter" />
+    <img src="/assets/images/plane2.png" id="plane2" />
+    <img src="/assets/images/plane1.png" id="plane1" />
+    <h1 class="col-6 p-4 mx-auto" style="font-weight: 500; padding-top: 100px !important;">The Smart Way To Park</h1>
+    <p class="">
+      Your experience of hassle free parking
+    </p> -->
+    <!-- Search -->
+    <!-- <div class="container pt-4"> -->
+    <!--  switching buttons-->
+    <!-- <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group flex-wrap mr-2 mx-auto col-10 p-0" data-toggle="button" role="group"
+          aria-label="First group">
+          <button type="button" (click)="changeSearchMode(Mode.City)" class="btn btn-switch" [ngClass]="{
+              'btn-switchSelected': isSelected(Mode.City),
+              'btn-switch': !isSelected(Mode.City)
+            }">
+            City
+          </button>
+          <button type="button" (click)="changeSearchMode(Mode.Airport)" class="btn btn-switch" [ngClass]="{
+              'btn-switchSelected': isSelected(Mode.Airport),
+              'btn-switch': !isSelected(Mode.Airport)
+            }">
+            Airport
+          </button>
+          <button type="button" (click)="changeSearchMode(Mode.Boat)" class="btn btn-switch" [ngClass]="{
+              'btn-switchSelected': isSelected(Mode.Boat),
+              'btn-switch': !isSelected(Mode.Boat)
+            }">
+            Boat
+          </button>
+          <button type="button" (click)="changeSearchMode(Mode.Helicopter)" class="btn btn-switch" [ngClass]="{
+              'btn-switchSelected': isSelected(Mode.Helicopter),
+              'btn-switch': !isSelected(Mode.Helicopter)
+            }">
+            Helicopter
+          </button>
+          <button type="button" (click)="changeSearchMode(Mode.Seaplane)" class="btn btn-switch" [ngClass]="{
+              'btn-switchSelected': isSelected(Mode.Seaplane),
+              'btn-switch': !isSelected(Mode.Seaplane)
+            }">
+            Seaplane
+          </button>
+        </div>
+      </div> -->
+    <!-- End-switching buttons -->
+    <!-- <div class="container">
+        <div class="row">
+          <div class="col-10 p-2 mx-auto search-container">
+            <div action="" [formGroup]="searchForm" accept-charset="UTF-8" method="get">
+              <div class="input-group search-group">
+                <input #searchBar type="text" name="search" id="search"
+                  [formControlName]="SEARCH_FROM_METADATA.searchBar" placeholder="Search for parking lot"
+                  class="form-control" />
+                <input *ngIf="displayLength" type="text" name="boat_length" id="boat_length" numbersOnly
+                  [formControlName]="SEARCH_FROM_METADATA.vehicleLength" value=""
+                  placeholder="{{ modePlaceholder }} length in ft" class="form-control col-3" />
+                <span class="input-group-btn col-2 p-0">
+                  <input type="button" name="commit" value="Search" class="btn btn-search col-12"
+                    data-disable-with="Search" [disabled]="searchForm.invalid" (click)="search()" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    <!-- </div> -->
+    <!-- End-Search -->
+
+  </div>
+  <div class="image-wrapper">
+    <img src="/assets/images/bg-car-couple.png" />
+  </div>
+</div>

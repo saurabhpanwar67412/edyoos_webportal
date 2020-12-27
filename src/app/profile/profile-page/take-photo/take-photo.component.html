@@ -1,0 +1,4 @@
+<div class="take-photo-wrapper">
+    <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+    <button class="btn btn-primary take-photo" (click)="triggerSnapshot()">Take Photo</button>
+</div>

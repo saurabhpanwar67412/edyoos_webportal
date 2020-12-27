@@ -1,0 +1,138 @@
+<nav class="navbar fixed-top navbar-expand navbar-dark nav-st">
+    <img src="assets/images/edyoos-logo.svg" class="img-logo" />
+    <a class="navbar-brand pl-2" href="#">Edyoos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      (click)="toggleCollapsed()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarSupportedContent" [ngClass]="{
+        collapse: collapsed,
+        'navbar-collapse': true,
+        'nav-bar-toggled': !collapsed
+      }">
+      
+      <ul class="navbar-nav ml-auto nav-icon">
+  
+        <!-- <li class="fa fa-shopping-cart pr-2 cart" style="position: relative;" (click)="openCartDetails()">
+          <span class="notification" *ngIf="ordersCount > 0">{{ ordersCount }}</span>
+        </li>
+  
+        <li *ngIf="isLoggedIn">
+          <a class="nav-link p-0 my-1 mx-2" (click)="router.navigateByUrl('dashboard/myorders')"><img
+              src="/assets/images/stack-icon.png" class="shopping-icon dashboard-icon" /></a>
+        </li>
+  
+        <li class="fa fa-user pr-2 pt-1 cart" style="position: relative;" (click)="router.navigateByUrl('profile')"
+          *ngIf="isLoggedIn">
+        </li> -->
+  
+        <li class="nav-item">
+  
+          <a [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+          </a>
+  
+          <mat-menu #menu="matMenu" >
+  
+            <button (click)="router.navigateByUrl('pages/login')" *ngIf="!isLoggedIn" mat-menu-item>
+  
+              <span>Sign In</span>
+            </button>
+  
+            <button (click)="router.navigateByUrl('pages/register')" *ngIf="!isLoggedIn" mat-menu-item>
+              <span>Sign Up</span>
+            </button>
+  
+            <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/dashboard')" mat-menu-item>
+              <span>Dashboard</span>
+            </button>
+  
+            <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/myOrders')" mat-menu-item>
+              <span>My Orders</span>
+            </button>
+
+              <button *ngIf="isLoggedIn"  mat-menu-item>
+                  <span>Payment</span>
+              </button>
+
+              <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('profile')" mat-menu-item>
+                  <span>Profile</span>
+              </button>
+
+  
+            <button *ngIf="isLoggedIn" (click)="signOut()" mat-menu-item>
+              <span>Sign Out</span>
+            </button>
+  
+          </mat-menu>
+  
+          <!-- <button *ngIf="!isLoggedIn" class="btn my-2 mx-1 my-sm-0 btn-custom" type="submit"
+            (click)="router.navigateByUrl('auth/login')">
+            Sign-in
+          </button>
+          <button *ngIf="!isLoggedIn" class="btn my-2 ml-1 my-sm-0 btn-custom" type="submit"
+            (click)="router.navigateByUrl('auth/signup')">
+            Sign-up
+          </button>
+          <button *ngIf="isLoggedIn" class="btn my-2 my-sm-0 btn-custom" type="submit" (click)="signOut()">
+            Sign-out
+          </button> -->
+  
+        </li>
+      </ul>
+    </div>
+  
+    <mat-card class="cart-details" [style]="'top:'+cartTopStyle">
+  
+      <div  *ngIf="ordersCount==0" class="text-center" style="margin-top: 100px;">
+       
+          <h3>There is no items available in the cart</h3>
+       
+      </div>
+  
+      <div *ngIf="ordersCount>0" class="cart-font">
+        <div class="text-center cart-title">
+          <strong>Order Details</strong> ({{ordersCount}} Items)
+        </div>
+  
+  
+        <mat-card-content>
+  
+          <div class="row mt-4" *ngFor="let propertyGroup of cartPropertyGroup; let i = index">
+  
+            <div class="col-md-12">
+  
+              <div class="row">
+                <div class="col-md-10">
+                  {{propertyGroup.propertyname}}
+                </div>
+                <div class="col-md-2">
+                  ${{propertyGroup.pricingAmount}}
+                </div>
+              </div>
+  
+              <div class="row mt-3">
+                <div class="col-md-10">
+                  <a routerLink="" (click)="goToPlace(propertyGroup)">Details</a>
+                </div>
+                <div class="col-md-2">
+                  <a routerLink="" (click)="deletePlace(i)">Delete</a>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </mat-card-content>
+  
+        <mat-card-actions class="text-center text-white">
+          <button mat-raised-button color="primary" (click)="router.navigateByUrl('cart')" class="text-white">Book Now</button>
+        </mat-card-actions>
+  
+      </div>
+  
+    </mat-card>
+  
+  </nav>
+  

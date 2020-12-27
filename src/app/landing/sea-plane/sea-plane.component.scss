@@ -1,0 +1,235 @@
+.follow {
+    position: fixed;
+    right: 1%;
+    top: 25%;
+    writing-mode: vertical-rl;
+    color: black;
+    background-color: #ffffff86;
+    border-radius: 30px;
+    padding: 15px 0px;
+    z-index: 2;
+  }
+  .follow p {
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 8px;
+    padding-bottom: 6px;
+  }
+  .follow img {
+    width: 25px;
+    margin-right: 6px;
+  }
+  .col-2-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .btn-switch {
+    background-color: #226ec5;
+    border: 1px solid #0b3c5f;
+    color: #f4f4f4;
+  }
+  .btn-switch:hover {
+    color: #226ec5;
+    border: 1px solid #0b3c5f;
+    background-color: #ffffff;
+  }
+  .btn-switchSelected {
+    color: #226ec5;
+    border: 1px solid #0b3c5f;
+    background-color: #ffffff;
+  }
+  .btn-search {
+    background-color: rgba(76, 218, 100) !important;
+    color: #f4f4f4;
+    &:hover{
+      background-color: rgb(0, 0, 0) !important;
+      color: #f4f4f4 !important;
+        outline: none !important;
+        border: none !important;
+        outline:none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;  }
+    
+  }
+  .btn-search:hover {
+    color: #226ec5;
+    background-color: #ffffff;
+    background-color: rgb(0, 0, 0) !important;
+      color: #f4f4f4 !important;
+        outline: none !important;
+        border: none !important;
+        outline:none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none; 
+  }
+    .search-group {
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  
+  
+  .home-background {
+    background-image: url("https://static.wixstatic.com/media/a37347_ccc56a0f485a48c18c6d1d0daca30ee7~mv2.jpg/v1/fill/w_1903,h_510,al_t,q_85,usm_0.66_1.00_0.01/a37347_ccc56a0f485a48c18c6d1d0daca30ee7~mv2.webp");
+    background-repeat: no-repeat;
+    //background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  top center;
+    height: auto;
+    z-index: -1;
+  }
+  .landing-page-wrapper{
+    background-image: url("https://static.wixstatic.com/media/a37347_ccc56a0f485a48c18c6d1d0daca30ee7~mv2.jpg/v1/fill/w_1903,h_510,al_t,q_85,usm_0.66_1.00_0.01/a37347_ccc56a0f485a48c18c6d1d0daca30ee7~mv2.webp");
+    background-repeat: no-repeat;
+    min-height: 560px;
+    position: relative;
+  }
+  @media only screen and (max-height: 500px) {
+    .home-background {
+     // background-image: url("/assets/images/background_img.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+  }
+  // .home {
+  //   position: relative;
+  //   top: 0px;
+  //   padding: 20px 0px;
+  //   height: 500px;
+  //   // background-color: #2c303491;
+  //   color: white;
+  // }
+  
+  .home h1 {
+    text-align: center;
+    border-bottom: 3px solid #ffffff;
+  }
+  .home p {
+    text-align: center;
+    font-size: 20px;
+  }
+  .centered {
+    text-align: center;
+  }
+  .button-a {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1.4em;
+    margin: 15px 15px;
+    border-radius: 50px;
+    border: 2px solid #226ec5;
+    background-color: #226ec5;
+    color: #f4f4f4;
+    transition: all 0.3s ease 0s;
+  }
+  
+  .button-a:hover {
+    border: 2px solid #226ec5;
+    color: #226ec5;
+    background-color: #f4f4f4;
+  }
+  
+  .home img {
+    max-width: 25%;
+  }
+  #boat {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+  }
+  #car {
+    position: absolute;
+    position: absolute;
+    bottom: 49px;
+    left: 37%;
+    /* max-width: 30%; */
+    /* width: 30%; */
+    max-height: 100%;
+    z-index: 1000;
+  }
+  #truck{
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%,0%);
+  }
+  #helicopter {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+  }
+  #plane2 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+  }
+  #plane1 {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+  }
+  .no-focus{
+    &:focus,&:active,&:hover{
+      outline:  none !important;
+      border:  none !important;
+    }
+  }
+  .form-control {
+    background-color: rgb(219, 219, 219);
+    &:hover, &:active,&:focus{
+      outline: none !important;
+      border: none !important;
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      background-color: rgba(76, 218, 100) !important;;
+    }
+  }
+  select option {
+    margin: 40px;
+    background: #ffffff !important;
+    color: #000 !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4) !important;
+  }
+  #searchbtn {
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    &:hover{
+      outline: none !important;
+      border: none !important;
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;  }
+  }
+  .form-control-lg{
+    font-size: 17px !important;
+    border-radius: 5px !important;
+  }
+
+  .city-park-wrapper{
+    background: url("/assets/images/sea-plane-parking-full.jpg");
+    background-repeat: no-repeat;
+    min-height: 635px;
+    background-size: cover;
+    position: relative;
+  }
+  .search-engine-heading {
+    font-size: 42px;
+    margin: 30px 0 5px;
+  }
+  .search-container{
+    margin: 105px 0;
+    padding: 40px 90px 80px 90px;
+  }

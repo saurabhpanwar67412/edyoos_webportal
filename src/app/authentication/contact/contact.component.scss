@@ -1,0 +1,63 @@
+.contact-wrapper{
+    height: auto;
+    min-height: 77vh;
+     background-repeat: no-repeat;
+     background-position: center center;
+        //background-size: cover;
+    background-image: url("/assets/images/viagalactica-DxHR8K5Egjk-unsplash_edited_edited.jpg");
+
+}
+.form-control{
+    background-color:#dbdbdb !important;
+    color: #000;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.form-control {
+    background-color: rgb(219, 219, 219);
+    &:hover, &:active,&:focus{
+      outline: none !important;
+      border: none !important;
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      background-color: rgba(76, 218, 100) !important;;
+    }
+  }
+  ::-webkit-input-placeholder { /* Edge */
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+
+  }
+  
+  ::placeholder {
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .btn-login{
+    background: rgba(76, 218, 100) !important;;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 20px;
+    border: 0;
+    &:hover{
+        background: #000;
+        color: #fff;
+    }  
+  }
+  .text-white{
+      color: #fff;
+  }
+  .w-37 {
+    width: 37%;
+  }

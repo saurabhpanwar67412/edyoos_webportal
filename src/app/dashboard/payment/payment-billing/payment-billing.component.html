@@ -1,0 +1,75 @@
+<form [formGroup]="billlingDetailsForm" (ngSubmit)="updateBillingDetails()">
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-md-12 text-left px-0">
+                <h2 class="p-0 pl-3 h2 mb-0">Billing Details</h2>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="full-width mt-0">
+                    <mat-label>Street</mat-label>
+                    <input #searchBar matInput formControlName="line1" placeholder="Street">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6 mt-0">
+
+                <mat-form-field class="full-width">
+                    <mat-label>Street (line 2)</mat-label>
+                    <input matInput formControlName="line2" placeholder="Street (line 2)">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" placeholder="City">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Postal Code</mat-label>
+                    <input type="number" matInput formControlName="postalCode" placeholder="Postal">
+                    <mat-error>
+                        Postal Code is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>State/Province</mat-label>
+                    <input matInput formControlName="state" placeholder="State/Province">
+                </mat-form-field>
+            </div>
+
+            <!-- <div class="col-md-6">
+
+                <mat-form-field class="full-width">
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="country">
+                        <mat-option [value]="'US'">US</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div> -->
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="float-right">
+                    <button (click)="closeDialog()" type="button" class="btn btn-secondary mr-2">
+                        Cancel
+                    </button>
+                    <button type="submit" [disabled]="billlingDetailsForm.invalid" class="btn btn-primary">
+                        Update Address
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>

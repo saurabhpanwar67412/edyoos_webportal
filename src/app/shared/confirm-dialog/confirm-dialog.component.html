@@ -1,0 +1,11 @@
+<div class="wrapper w-100 ">
+    <div [ngClass]="{'text-center':!data.cancelText}" mat-dialog-content class="m-0 p-3 pt-4">
+        <p class="dialog-message mb-0 text-dark" style="font-size: 20px;">{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions class="m-0 p-3 text-right d-block" [ngClass]="{'text-center':!data.cancelText}">
+        <button class="dialog-btn" mat-raised-button type="button" *ngIf="data.cancelText"
+            (click)="cancel()">{{ data.cancelText }}</button>
+        <button class="dialog-btn" mat-raised-button color="warn" type="button"
+            (click)="confirm()">{{ data.confirmText }}</button>
+    </div>
+</div>

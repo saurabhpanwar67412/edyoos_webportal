@@ -1,0 +1,176 @@
+<section class="row no-gutters">
+  <div class="container">
+    <div class="head-container">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <nav class="navbar navbar-expand-lg navbar-light stroke">
+            <div class="logo-header">
+              <a id="header-logo" [routerLink]="['/landing/home']" class="font-poponis">EDYOOS</a>
+            </div>
+            <button class="navbar-toggler" type="button" (click)="navbarCollapsed = !navbarCollapsed"
+              [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" [ngbCollapse]="navbarCollapsed"
+              id="navbarSupportedContent">
+              <ul>
+
+                <li><a routerLinkActive="text-active" [routerLink]="['/landing/home']" class="text-uppercase"
+                    href="#">Home</a></li>
+                <li (mouseover)="showSection = true" (mouseleave)="showSection= false"><a
+                    class="text-uppercase dropdown-btn" href="#">Find Parking</a>
+                  <div class="dropdown-content " [hidden]="!showSection">
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/city-parking']">CITY PARKING </a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/airport-parking']">AIRPORT PARKING
+                    </a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/semi-truck-parking']">SEMI-TRUCK
+                      PARKING
+                    </a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/truck-parking']">TRUCK & TRAILER
+                      PARKING
+                    </a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/boat-parking']">BOAT PARKING
+                    </a>
+                   
+                    <!-- <a routerLinkActive="text-active" [routerLink]="['/pages/seaplane-parking']">SEAPLANE
+                      PARKING
+                    </a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/helicopter-parking']">HELICOPTER
+                      PARKING
+                    </a> -->
+                  </div>
+                </li>
+                <li *ngIf="!isLoggedIn"><a class="text-uppercase" routerLinkActive="text-active"
+                    [routerLink]="['/pages/login']">My
+                    Account</a></li>
+                <li><a class="text-uppercase" routerLinkActive="text-active"
+                    [routerLink]="['/pages/contact']">Contact</a></li>
+                <li (mouseover)="showSectionpartner = true" (mouseleave)="showSectionpartner= false"><a
+                    class="text-uppercase" [routerLink]="['/pages/partnerships']"
+                    routerLinkActive="text-active">Partnerships</a>
+                  <div class="dropdown-content " [hidden]="!showSectionpartner">
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/who-we-serve']">WHO WE SERVE</a>
+                    <a routerLinkActive="text-active" [routerLink]="['/pages/what-we-offer']">WHAT WE OFFER
+                    </a>
+                  </div>
+                </li>
+
+                <li #bagIconElement class="nav-link" style="position: relative;" (click)="openCartDetails()">
+                  <i class="fa fa-shopping-bag change-color"></i>
+                  <span class="notification" *ngIf="ordersCount > 0">{{ ordersCount }}</span>
+                </li>
+
+                <li *ngIf="isLoggedIn">
+                  <a [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                  </a>
+                  <mat-menu #menu="matMenu">
+
+                    <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/dashboard')" mat-menu-item>
+                      <span>Dashboard</span>
+                    </button>
+                    <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/dashboard/myorders')" mat-menu-item>
+                      <span>My Orders</span>
+                    </button>
+                    <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('user/dashboard/payment')" mat-menu-item>
+                      <span>Payment</span>
+                    </button>
+                    <button *ngIf="isLoggedIn" (click)="router.navigateByUrl('profile')" mat-menu-item>
+                      <span>Profile</span>
+                    </button>
+
+                    <button *ngIf="isLoggedIn" (click)="signOut()" mat-menu-item>
+                      <span>Sign Out</span>
+                    </button>
+                  </mat-menu>
+                </li>
+              </ul>
+
+              <mat-card class="cart-details" [style]="'top:'+cartTopStyle">
+                <div #cartDivElement>
+                  <div *ngIf="ordersCount==0" class="text-center" style="margin-top: 100px;">
+                    <h3>There is no items available in the cart</h3>
+                  </div>
+
+                  <div class="text-center" *ngIf="showCartSpinner">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+
+                  <div *ngIf="ordersCount>0 && !showCartSpinner" class="cart-font">
+                    <div class="text-center cart-title">
+                      <strong>Order Summary</strong> ({{ordersCount}} Items)
+                    </div>
+                    <hr class="mb-0 mt-md-1 mt-sm-1 my-2" />
+                    <mat-card-content class="text-left">
+                      <div class="row mt-md-4 no-gutters flex-nowrap"
+                        *ngFor="let propertyGroup of cartPropertyGroup; let i = index">
+                        <div class="col-md-12">
+                          <div class="row no-gutters align-items-center  flex-nowrap">
+                            <div class="col-6">
+                              <strong *ngIf="propertyGroup.propertyName"
+                                tooltip="{{ propertyGroup.propertyName }}">{{ commonService.stringSlicer( propertyGroup.propertyName,20)}}</strong>
+
+                              <strong *ngIf="propertyGroup.propertyname"
+                                tooltip="{{ propertyGroup.propertyname }}">{{ commonService.stringSlicer(propertyGroup.propertyname,20)}}</strong>
+                            </div>
+                            <div class="col-4 font-weight-bold">
+                              {{propertyGroup.calculatedAmount | currency}}
+                            </div>
+                            <div class="col-2 pl-md-0 pl-2 ">
+                              <span (click)="deletePlace(i)" [hidden]="hideDeleteIcon" #deleteIconElement
+                                style="cursor: pointer;font-size: 18px;" class="text-danger ml-2 mt-1 float-md-right">
+                                <img style="max-width: 20px;" src="./assets/images/trash.png">
+                              </span>
+                              <span *ngIf="hideDeleteIcon" class="spinner-border text-danger mt-1 float-md-right"
+                                style="width: 1rem; height: 1rem;" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row no-gutters align-items-center my-3">
+                            <div class="col-md-6 col-6">
+                              <span class="det-date-yy">{{propertyGroup?.searchFromDateTime| date:'short'}}</span>
+                            </div>
+                            <div class="col-md-6 col-6">
+                              <span class="det-date-yy">{{propertyGroup?.searchToDateTime| date:'short'}}</span>
+                            </div>
+
+                            <div *ngIf="!(propertyGroup?.isSpotAvaliable)" class="col-md-12 text-center pt-2"
+                              style="font-size:11px;">
+                              <span class="text-danger">{{spotNotAvailableErrorMessage}}</span>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="mb-0 mt-md-1 my-2" />
+                      <div class="row mt-md-3 no-gutters align-items-center">
+                        <div class="col-md-6 col-6">
+                          <span class="font-weight-bold">Total ({{ordersCount}} Items) :</span>
+                        </div>
+                        <div class="col-md-6 col-6 font-weight-bold text-primary ">
+                          {{total | currency}}
+                        </div>
+                      </div>
+                      <hr class="mb-0" />
+                    </mat-card-content>
+
+                    <mat-card-actions class="text-center text-white my-0">
+                      <button mat-raised-button color="warn" class="text-white" (click)="reserveNow()">Proceed
+                        to Checkout</button>
+                    </mat-card-actions>
+                  </div>
+                </div>
+              </mat-card>
+
+            </div>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,145 @@
+<div class="mt-3">
+    <div class="row no-gutters pl-lg-3  pl-3">
+        <!-- <div class="offset-1 d-xl-block d-none">&nbsp;</div> -->
+        <div class="col-xl-9 col-lg-10 col-12">
+            <h1 class="h1 w-75">Your Order Details</h1>
+            <div class="row no-gutters pl-xl-0 pl-lg-1pl-3 ">
+                <div class="container px-0 mx-0 col-xl-10 col-12"
+                    style="max-height: 90vh;overflow-x: scroll;max-width: 750px;">
+                    <div *ngFor="let order of orders; let i = index">
+                        <mat-toolbar class="py-0 border mt-2 row no-gutters">
+                            <div class="col-md col-12" style="font-size: 14px;">
+                                <span
+                                    tooltip="{{order.parkingPlace}}">{{commonService.stringSlicer( order.parkingPlace, 30)}}</span>
+                            </div>
+                            <div class="col-md-auto col-12">
+                                <div>
+                                    <a target="_blank" style="font-size: 14px;" class="btn-link"
+                                        href="https://www.google.com/maps/dir/{{currentAdd}}/{{order.address}}">
+                                        <img src="./assets/images/redo.svg" style="width: 20px;">
+                                        Get Directions</a>
+                                </div>
+                            </div>
+                        </mat-toolbar>
+                        <mat-card class="px-lg-4 pl-0">
+                            <div class="row my-0 no-gutters align-items-center">
+                                <div class="col-md-auto col-12 text-center">
+                                    <!-- <div class="custom-col-2 mx-md-0 mx-auto"
+                                        *ngIf="order.bookingID === order?.bookingID">
+                                        <img class="profile-image rounded" [src]="getImage(order)">
+                                        <img class="profile-image rounded" *ngIf="!getImage(order)"
+                                            src="./assets/images/parking-carr.svg">
+                                    </div> -->
+                                    <!-- <div class="custom-col-2  mx-md-0 mx-auto"
+                                        *ngIf="order.bookingID !== order?.bookingID">
+                                        <img class="profile-image rounded" [src]="getImage(order)">
+                                        <img class="profile-image rounded" *ngIf="!getImage(order)"
+                                            src="./assets/images/parking-carr.svg">
+
+                                    </div> -->
+
+                                    <div class="custom-col-2 mx-md-0 mx-auto">
+                                        <img class="profile-image rounded" *ngIf="order.files && order.files[0]"
+                                            [src]="order.files[0].filePath">
+                                        <img class="profile-image rounded" *ngIf="!order.files"
+                                            src="./assets/images/parking-carr.svg">
+                                    </div>
+
+                                </div>
+                                <div class="col p-0 pl-md-5 pl-1 w-100">
+                                    <div class="d-md-flex">
+                                        <h3 class="h3 col-auto m-0 pl-0" style="font-size: 14px;"> <span
+                                                style="font-size: 14px;font-weight: bold;">Check-in
+                                            </span> <img style="width: 24px;" src="./assets/images/park.svg">
+                                            {{order.FromDate | date:'medium'}} {{order.fromDate | date:'medium'}}</h3>
+                                        <h3 class="h3 col-auto text-md-center px-md-2 px-0  m-0"
+                                            style="font-size: 14px;"> <span
+                                                style="font-size: 14px;font-weight: bold;">Check-out
+                                            </span> <img style="width: 24px;" src="./assets/images/placeholder.svg">
+                                            {{order.ToDate | date:'medium'}} {{order.toDate | date:'medium'}}</h3>
+                                    </div>
+                                    <div class="col w-100 d-md-flex pl-0 align-items-center">
+                                    <div class="col p-0 pl-0 w-100">
+                                        <span class="font-weight-bold">Address:</span> <span
+                                            class="ml-2">{{order.address}}</span>
+                                    </div>
+                                    <div ml-auto pr-6 align-self-end>
+                                        <ngx-barcode  bc-value="{{order.toDate|date:'yMdhmmssa'}}" 
+                                        [bc-width]="width" [bc-height]="height"></ngx-barcode>
+                                    </div>
+                                </div>
+                                    <div class="col w-100 d-md-flex pl-0 align-items-center">
+                                        <div>
+                                            <div class="d-md-flex pt-md-1">
+                                                <!-- <div class="col-auto pl-0 ml-0">
+                                                    <span class="font-weight-bold">Payment Status: </span>
+                                                    <span *ngIf="order.paymentstatus === 'Payment Success'">
+                                                        <span class="text-success "> Success</span>
+                                                    </span>
+                                                    <span *ngIf="order.paymentstatus !== 'Payment Success'">
+                                                        <span class="text-danger font-weight-bold"> Failed</span>
+                                                    </span>
+                                                </div> -->
+                                                <div class="col-auto pl-0 ml-0">
+                                                    <span class="font-weight-bold">Booking Status: </span>
+                                                    <span *ngIf="!order.isBookingCancelled">
+                                                        <!-- <img src="./assets/images/bill.svg" style="width: 20px;"> -->
+                                                        <span class="text-success "> Success</span>
+                                                    </span>
+                                                    <span *ngIf="order.isBookingCancelled">
+                                                        <span class="text-danger font-weight-bold"> Cancelled</span>
+                                                    </span>
+
+                                                </div>
+                                                <div class="col-auto text-right pr-0 mr-0 "
+                                                    *ngIf="order.isBookingCancelled || order.showCancel || order.showCancelParking">
+                                                    <button style="font-size: 14px;" [disabled]="order.cancelBtnClick"
+                                                        class="btn bg-danger py-0 text-light"
+                                                        (click)="cancelDialog(order,{confirmDialog:true,submitDialog:false,cancelParking:order.showCancelParking},'400px')"
+                                                        *ngIf="order.showCancel || order.showCancelParking">
+                                                        <span class="spinner-border spinner-border-sm"
+                                                            *ngIf="order.cancelBtnClick" role="status"
+                                                            aria-hidden="true"></span>
+                                                        {{order.cancelBtnClick?'Loading...':order.showCancelParking?'Cancel Parking':'Cancel Booking'}}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- <div>
+                                <button class="btn btn-danger" *ngIf="order.showCancel"
+                                    (click)="openDialog({confirmDialog:true,submitDialog:false},'400px')">Cancel</button>
+                            </div> -->
+                                        </div>
+                                        <div class="ml-auto pr-3 align-self-end">
+                                            <span class="font-weight-bold">Total: </span> <span
+                                                class="font-weight-bold">
+                                                {{order.propertyGroupTotalAmount | currency}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="order.pmtRecurringStatus && order.pmtRecurringStatus !== PmtRecurringStatus.NA" class="col w-100 d-md-flex pl-0 mt-2 align-items-center">
+                                        <div class="col-auto pl-0 ml-0">
+                                            <span class="font-weight-bold">Recurring Payment Status: </span>
+                                            <span *ngIf="order.pmtRecurringStatus == PmtRecurringStatus.Active"
+                                             class="text-success">
+                                                Active
+                                            </span>
+                                            <span *ngIf="order.pmtRecurringStatus == PmtRecurringStatus.Completed"
+                                             class="text-success">
+                                             Completed
+                                            </span>
+                                            <span *ngIf="order.pmtRecurringStatus == PmtRecurringStatus.Stopped"
+                                             class="text-danger font-weight-bold">
+                                             Stopped
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <mat-accordion>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

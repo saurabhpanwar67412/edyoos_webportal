@@ -1,0 +1,52 @@
+<div class="container" id="booking">
+  <div class="top">
+    <h1>Plans & Pricing</h1>
+    <div class="toggle-btn">
+      <span style="margin: 0.8em;">Monthly</span>
+      <label class="switch">
+        <input type="checkbox" id="checbox" (click)="togglePeriod()" />
+        <span class="slider round"></span>
+      </label>
+      <span style="margin: 0.8em;">Annually</span>
+    </div>
+  </div>
+
+  <div class="package-container">
+    <div class="packages">
+      <h1>Car</h1>
+      <h2 class="text1" *ngIf="!isAnnual">$</h2>
+      <h2 class="text1" *ngIf="isAnnual">$$$</h2>
+      <ul class="list">
+        <li class="first">Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+      </ul>
+      <a href="#" class="button button1">Book</a>
+    </div>
+    <div class="packages">
+      <h1>Boat</h1>
+      <h2 class="text1" *ngIf="!isAnnual">$</h2>
+      <h2 class="text1" *ngIf="isAnnual">$$$</h2>
+      <ul class="list">
+        <li class="first">Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+      </ul>
+      <a href="#" class="button button1">Book</a>
+    </div>
+    <div class="packages">
+      <h1>Helicopter</h1>
+      <h2 class="text1" *ngIf="!isAnnual">$</h2>
+      <h2 class="text1" *ngIf="isAnnual">$$$</h2>
+      <ul class="list">
+        <li class="first">Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+        <li>Lorem ipsum</li>
+      </ul>
+      <a href="#" class="button button1">Book</a>
+    </div>
+  </div>
+</div>

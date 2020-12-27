@@ -1,0 +1,123 @@
+<div class="wrapper w-100" style="overflow: hidden;">
+    <h2 class="h2 m-0 py-2 pl-3 pt-md-2" style="background-color: #e5eaf5;">Edit Payment Method</h2>
+    <div *ngIf="!isPaymentAddressChange && !spinner" class="row pt-2 no-gutters justify-content-center">
+        <div class="col-12 px-4 pt-1 pb-4">
+            <form [formGroup]="billlingDetailsForm" (ngSubmit)="updateBillingDetails()">
+                <div class="">
+                    <div class="row no-gutters d-md-flex d-md-block d-none">
+                        <div class="col-md-3">
+                            <strong>Payment method</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong> Name on card</strong>
+                        </div>
+                        <div class="col-md-5">
+                            <strong>Expiry Date & Year</strong>
+                        </div>
+                    </div>
+                    <div class="row mt-2 ">
+                        <div class="col-md-3 col-12 mt-3">
+                            <img [src]="getImage(data.brand)" class="payment-card-img" alt="Visa logo">
+                            <span class="text-capitalize">{{data.brand}} </span> Card ending in {{data.last4}}
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <mat-form-field class="full-width">
+                                <mat-label>Card holder name</mat-label>
+                                <input matInput #input maxlength="200" class="w-100" formControlName="cardHolderName"
+                                    placeholder="Card holder name">
+                                <mat-error>
+                                    Card holder name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-5 px-0 mx-0 col-12">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <mat-form-field class="w-100 px-2">
+                                        <mat-label>Month</mat-label>
+                                        <mat-select formControlName="expMonth">
+                                            <mat-option *ngFor="let month of months" [value]="month.Value">
+                                                {{month.Text}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                        <mat-error>
+                                            Month is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <mat-form-field class="w-100 px-2">
+                                        <mat-label>Year</mat-label>
+                                        <mat-select formControlName="expYear">
+                                            <mat-option *ngFor="let year of years" [value]="year.Value">{{year.Text}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Year is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row no-gutters mt-1 ">
+                        <div class="col-md-4 col-12">
+                            <address>
+                                <strong>Billing Zip</strong><br>
+
+                                {{data.billingDetailsUpdate.addressUpdate.line1}}
+                                <br *ngIf="data?.billingDetailsUpdate?.addressUpdate?.line1">
+
+                                {{data.billingDetailsUpdate.addressUpdate.line2}}
+
+                                <br *ngIf="data?.billingDetailsUpdate?.addressUpdate?.line2">
+
+                                {{data.billingDetailsUpdate.addressUpdate.city}}
+
+                                <strong *ngIf="data?.billingDetailsUpdate?.addressUpdate?.state &&
+                                data.billingDetailsUpdate.addressUpdate.city ||
+                                data?.billingDetailsUpdate?.addressUpdate?.city &&
+                                data.billingDetailsUpdate.addressUpdate.postalCode
+                                ">,</strong>
+
+                                {{data.billingDetailsUpdate.addressUpdate.state}}
+                                <strong *ngIf="data?.billingDetailsUpdate?.addressUpdate?.postalCode &&
+                                data?.billingDetailsUpdate?.addressUpdate?.state">,</strong>
+
+                                {{data.billingDetailsUpdate.addressUpdate.postalCode}}<br
+                                    *ngIf="data?.billingDetailsUpdate?.addressUpdate?.postalCode">
+
+                            </address>
+
+                        </div>
+                        <div class="col-12 text-md-left mb-md-0 mb-2 text-center">
+                            <a class="btn btn-light" style="background-color: #e5eaf5;" (click)="addRessChange()">Change Billing Zip</a>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-md-12 col-12">
+                            <div class="float-md-right text-center">
+                                <button type="button" [mat-dialog-close]="false" class="btn btn-secondary mr-2">
+                                    Cancel
+                                </button>
+                                <button type="submit" [disabled]="billlingDetailsForm.invalid" class="btn btn-success">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="py-5 text-center" *ngIf="spinner">
+        <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div>
+        <app-payment-billing (cancelAddress)="cancelAddRessChange($event)" *ngIf="isPaymentAddressChange && !spinner">
+        </app-payment-billing>
+    </div>
+</div>

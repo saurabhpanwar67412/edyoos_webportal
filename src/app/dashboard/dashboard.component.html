@@ -1,0 +1,42 @@
+<app-user-nav-bar></app-user-nav-bar>
+<div class=" mt-5 col-12 px-0">
+  <ul class="d-flex mt-5 pt-3 flex-column dashboard-small">
+    <!-- <li [ngClass]="{  
+    'active-item': isSelected('home') }" class="list-item">
+      <a (click)="route('/user/dashboard/home')" class="mt-1 d-flex flex-nowrap menu-list align-items-center py-2 pl-4">
+        <span style="width: 23px;" class="material-icons">
+          home
+        </span>
+        <span class="pl-4">Dashboard</span>
+      </a>
+    </li> -->
+    <li [ngClass]="{  
+      'active-item': isSelected(DASHBOARD_TABS_METADATA.myorders) }" class="list-item" class="list-item">
+      <a (click)="route('/user/dashboard/myorders')" class="mt-1 d-flex flex-nowrap menu-list align-items-center py-2 pl-4">
+        <span style="width: 23px;" class="material-icons">
+          list_alt
+        </span>
+        <span class="pl-4">Orders</span>
+      </a>
+    </li>
+    <li [ngClass]="{  
+      'active-item': isSelected(DASHBOARD_TABS_METADATA.payment) }" class="list-item" class="list-item">
+      <a (click)="route('/user/dashboard/payment')" class="mt-1 d-flex flex-nowrap menu-list align-items-center py-2 pl-4">
+        <span style="width: 23px;" class="material-icons">
+          payment
+        </span>
+        <span class="pl-4">Payment</span>
+      </a>
+    </li>
+    <li [ngClass]="{  
+      'active-item': isSelected('/profile') }" class="list-item" class="list-item">
+      <a (click)="route('/profile')" class="mt-1 d-flex flex-nowrap menu-list align-items-center py-2 pl-4">
+        <span style="width: 23px;" class="material-icons">
+          account_circle
+        </span>
+        <span class="pl-4">Profile</span>
+      </a>
+    </li>
+
+  </ul>
+</div>

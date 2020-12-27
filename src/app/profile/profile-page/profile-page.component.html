@@ -1,0 +1,390 @@
+<app-nav-bar></app-nav-bar>
+<mat-drawer-container class="example-container" style="overflow-x: scroll;margin-top: 0px;">
+    <mat-drawer #drawer class="bg-light" style="min-width: 230px; position: fixed;" mode="over">
+        <app-dashboard></app-dashboard>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="row no-gutters pt-5" style="height: 100%;min-height: 100%;">
+            <app-side-bar [isOpen]="isOpen"></app-side-bar>
+            <div class="col">
+                <div class="pt-3">
+                    <button type="button" class="d-lg-block d-none text-primary font-weight-bolder" mat-button
+                        (click)="isOpen = !isOpen">
+                        <i aria-hidden="true" class="fa fa-bars"></i>
+                    </button>
+                    <button type="button" class="d-lg-none text-primary font-weight-bolder" mat-button
+                        (click)="drawer.toggle()">
+                        <i aria-hidden="true" class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="col mt-3 row no-gutters">
+                    <!-- <div class="offset-1">&nbsp;</div> -->
+                    <div class="col-xl-10 col-lg-10 col-12">
+                        <div class="container-fluid">
+                            <div>
+                                <div class="row">
+                                    <div class="col-xl-3 col-lg-4 col-12" style="background-color: #e5eaf5;">
+                                        <mat-card class="example-card border pb-4"
+                                            style="background-color: initial;box-shadow: none;" [formGroup]="imageForm">
+                                            <h2 class="mb-2 text-center h2">Profile Picture</h2>
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <ng-container>
+                                                    <div class="text-center" *ngIf="imagealreadyavailble==null">
+                                                        <img class="img img-fluid rounded-circle profile-image"
+                                                            [src]="cardImageBase64" />
+                                                    </div>
+                                                    <div class="text-center" *ngIf="imagealreadyavailble!=null">
+                                                        <img class="img img-fluid rounded-circle profile-image"
+                                                            [src]="imagealreadyavailble" />
+                                                    </div>
+                                                </ng-container>
+                                                <!-- <ng-container *ngIf="(!isImageSaved) && (imagealreadyavailble!=null)">
+                                                    <img class="img img-fluid rounded-circle profile-image"
+                                                        src="{{imagealreadyavailble}}" />
+                                                </ng-container> -->
+                                                <ng-container
+                                                    *ngIf="imagealreadyavailble==null && cardImageBase64==null">
+                                                    <img class="img img-fluid rounded-circle profile-image"
+                                                        src="assets/images/placeholder.png">
+                                                </ng-container>
+                                            </div>
+                                            <mat-card-content>
+                                                <!-- <div class="form-group"> -->
+                                                <!-- <fieldset class="form-group"> -->
+                                                {{imageError}}
+                                                <div class="text-lg-left text-center">
+
+                                                    <!-- <a class="btn btn-remove col-12 mt-3" (click)="removeImage()"
+                                                        *ngIf="imagealreadyavailble!=null || cardImageBase64!=null">Remove</a> -->
+
+                                                    <div formArrayName="files">
+                                                        <!-- <div *ngFor="let image of imageForms.controls; let i=index" [formGroupName]="i"> -->
+                                                        <div>
+                                                            <label class="btn btn-file mb-0 col-12 mt-3">
+                                                                <p>Change</p> <input type="file"
+                                                                    id="profile-file-upload"
+                                                                    (change)="fileChangeEvent($event)" hidden>
+                                                            </label>
+
+                                                            <!-- <div class="text-danger text-center" *ngIf="imageForms.controls[0].get('fileSource')?.errors &&
+                                                imageForms.controls[0].get('fileSource')?.errors?.requiredFileType">
+                                                    File Should be jpg or png
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="imageForms.controls[0].get('fileSource')?.errors &&
+                                                imageForms.controls[0].get('fileSource')?.errors?.requiredFileSize">
+                                                    File Size Should be Less than 1 MB
+                                                </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+                                                <!-- </fieldset> -->
+                                                <!-- </div> -->
+                                                <!-- <a class="btn btn-file col-12 mt-3" (click)="takePhoto()">Take Photo</a> -->
+                                            </mat-card-content>
+
+                                        </mat-card>
+                                    </div>
+                                    <div class="col-xl-9 col-lg-8 col-12" style="background-color: initial;">
+                                        <div class="border pb-3">
+                                            <h2 class="h2 text-center py-2 bg-my-light">Personal
+                                                Information</h2>
+                                            <!-- <p>We respect your privacy</p> -->
+                                            <div class="custom-row" [formGroup]="profileForm">
+                                                <mat-form-field class="col-6 py-0">
+                                                    <input matInput type="text" placeholder="First Name"
+                                                        [formControlName]="Profile_METADATA.firstName" required /><br />
+                                                    <mat-error>
+                                                        First Name is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6 py-0">
+                                                    <input matInput type="text" placeholder="Last Name"
+                                                        [formControlName]="Profile_METADATA.lastName" required /><br />
+                                                    <mat-error>
+                                                        Last Name is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6 py-0 ">
+                                                    <input matInput type="text" placeholder="Email"
+                                                        [formControlName]="Profile_METADATA.email" required /><br />
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.email).valid &&
+                                                    profileForm?.get(Profile_METADATA.email).touched && 
+                                                    profileForm?.get(Profile_METADATA.email).hasError('required')">
+                                                        Email is required
+                                                    </mat-error>
+                                                    <mat-error
+                                                        *ngIf="!profileForm?.get(Profile_METADATA.email).valid &&
+                                                    profileForm?.get(Profile_METADATA.email).touched && 
+                                                    profileForm?.get(Profile_METADATA.email).hasError('emailVaidatorsfor')">
+                                                        Please provide valid email address
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6 py-0 ">
+                                                    <mat-label>Gender</mat-label>
+                                                    <mat-select [formControlName]="Profile_METADATA.gender" required>
+                                                        <mat-option [value]="gender[item]"
+                                                            *ngFor="let item of getGenderArray()">
+                                                            {{ item }}
+                                                        </mat-option>
+                                                    </mat-select>
+
+                                                    <mat-error>
+                                                        Gender is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6 py-0">
+                                                    <input matInput type="number" placeholder="Phone Number"
+                                                        [formControlName]="Profile_METADATA.phoneNumber" required
+                                                        onkeydown="javascript:return event.keyCode == 69 ? false : true"
+                                                        onKeyPress="if(this.value.length==10) return false;" />
+                                                    <mat-error
+                                                        *ngIf="!profileForm?.get(Profile_METADATA.phoneNumber).valid &&
+                                            profileForm?.get(Profile_METADATA.phoneNumber).touched && 
+                                            (profileForm?.get(Profile_METADATA.phoneNumber).hasError('required') || profileForm?.get(Profile_METADATA.phoneNumber).hasError('pattern'))">
+
+                                                        Phone number is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6">
+                                                    <input #searchBar matInput type="Address"
+                                                        [formControlName]="Profile_METADATA.address1" required
+                                                        placeholder="Address" />
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.address1).valid &&
+                                            profileForm?.get(Profile_METADATA.address1).touched && 
+                                            profileForm?.get(Profile_METADATA.address1).hasError('required')">
+                                                        Address is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6">
+                                                    <input matInput type="apt"
+                                                        [formControlName]="Profile_METADATA.address2"
+                                                        placeholder="Apartment/suite/unit/building/floor" />
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6">
+                                                    <input matInput type="apt" placeholder="City" required
+                                                        [formControlName]="Profile_METADATA.city" />
+
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.city).valid &&
+                                                        profileForm?.get(Profile_METADATA.city).touched && 
+                                                        profileForm?.get(Profile_METADATA.city).hasError('required')">
+                                                        City is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6">
+                                                    <input matInput type="apt" placeholder="State" required
+                                                        [formControlName]="Profile_METADATA.state" />
+
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.state).valid &&
+                                                        profileForm?.get(Profile_METADATA.state).touched && 
+                                                        profileForm?.get(Profile_METADATA.state).hasError('required')">
+                                                        State is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                                <mat-form-field class="col-6">
+                                                    <input matInput type="number" placeholder="ZipCode" required
+                                                        [formControlName]="Profile_METADATA.zipCode" />
+
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.zipCode).valid &&
+                                                    profileForm?.get(Profile_METADATA.zipCode).touched && 
+                                                    profileForm?.get(Profile_METADATA.zipCode).hasError('max')">
+                                                        Zip code must be 5 digit
+                                                    </mat-error>
+                                                    <mat-error *ngIf="!profileForm?.get(Profile_METADATA.zipCode).valid &&
+                                                    profileForm?.get(Profile_METADATA.zipCode).touched && 
+                                                    profileForm?.get(Profile_METADATA.zipCode).hasError('required')">
+                                                        Zip code is required
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                                <mat-form-field class="col-12 py-0 px-3">
+                                                    <mat-label>About You</mat-label>
+                                                    <textarea class="text-area py-0 my-0"
+                                                        style="min-height: 30px !important;height: 30px !important;"
+                                                        matInput [formControlName]="Profile_METADATA.aboutYou"
+                                                        cdkTextareaAutosize cdkAutosizeMinRows="3"
+                                                        cdkAutosizeMaxRows="10"></textarea>
+                                                </mat-form-field>
+                                                <div class="col-12 m-0 text-lg-right text-center" *ngIf="!profileSaved">
+
+                                                    <!-- <button class="btn-save m-0  ml-lg-auto" (click)="saveProfile()"
+                                                        *ngIf="updatebutton"
+                                                        [disabled]="(imageForm.invalid  || (!profileForm.dirty && !imageForm.dirty))">Save</button> -->
+                                                    <!-- <button class="btn-save m-0  ml-lg-auto" (click)="saveProfile()"
+                                                        *ngIf="!updatebutton"
+                                                        [disabled]="(profileForm.invalid || (profileForm.dirty || imageForm.dirty))">Update</button> -->
+
+                                                    <button class="btn-save m-0  ml-lg-auto" (click)="saveProfile()"
+                                                        [disabled]="(profileForm.invalid || !profileForm.dirty)">Update</button>
+                                                </div>
+                                                <div class="alert alert-success mx-auto mt-2 px-5 br-5"
+                                                    *ngIf="profileSaved" role="alert">
+                                                    Profile Saved Successfully
+                                                </div>
+                                                <div class="text-danger text-center">
+                                                    {{httperror}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-4 col-12 px-0" style="background-color: #e5eaf5;">
+                                        <div class="change-pw my-0" style="background-color: initial;"
+                                            [formGroup]="changePasswordForm">
+                                            <h2 class="mb-1 mt-0 text-center h2">Change password</h2>
+                                            <mat-form-field class="col-8 py-1 mw-100">
+                                                <input matInput type="password" required (blur)="logValidationErrors()"
+                                                    [formControlName]="Change_Password_Metadata.currentPassword"
+                                                    placeholder="Current password" /><br />
+                                                <mat-error *ngIf="formErrors[Change_Password_Metadata.currentPassword]">
+                                                    {{formErrors[Change_Password_Metadata.currentPassword]}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <mat-form-field class="col-8 py-1 mw-100">
+                                                <input matInput type="password" required
+                                                    [formControlName]="Change_Password_Metadata.newPassword"
+                                                    (blur)="logValidationErrors()" placeholder="New password" /><br />
+                                                <mat-error *ngIf="formErrors[Change_Password_Metadata.newPassword]">
+                                                    {{formErrors[Change_Password_Metadata.newPassword]}}
+                                                </mat-error>
+
+                                            </mat-form-field>
+                                            <mat-form-field class="col-8 py-1 mw-100">
+                                                <input matInput type="password" required (blur)="logValidationErrors()"
+                                                    [formControlName]="Change_Password_Metadata.confirmPassword"
+                                                    placeholder="Confirm password" /><br />
+                                                <mat-error *ngIf="formErrors[Change_Password_Metadata.confirmPassword]">
+                                                    {{formErrors[Change_Password_Metadata.confirmPassword]}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <button class="btn-pw" [disabled]="changePasswordForm?.invalid"
+                                                (click)="updatePassword()">
+                                                <p>Update</p>
+                                            </button>
+                                            <!-- <div class="alert alert-success" *ngIf="passwordChanged" role="alert">
+                                                Password Changed Successfully
+                                            </div> -->
+                                            <div class="text-danger text-center">
+                                                {{httperror}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-9 col-lg-8 col-12 px-lg-2 px-0">
+                                        <div class="mt-2 border">
+                                            <h2 class="h2 text-center py-2 bg-my-light">License
+                                                Plate</h2>
+                                            <div style="cursor: pointer;" *ngIf="!show" class=" btn-link ml-1">
+                                                <span style="font-size: 16px;">+</span>
+                                                <span (click)="toggle()" class="pl-0 font-weight-bold"><span></span>
+                                                    Add New Licence
+                                                    Plate</span>
+                                            </div>
+                                            <div *ngIf="show" class="mt-2 p-2">
+                                                <div class="row align-items-center" [formGroup]="vehicleForm">
+                                                    <mat-form-field class="col-4 md-3">
+                                                        <input matInput type="text" placeholder="Licence Plate Number"
+                                                            maxlength="50" required
+                                                            formControlName="vehicleLicensePlateNumber" /><br />
+                                                        <mat-error>
+                                                            Licence Plate is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="col-4 md-3">
+                                                        <input matInput type="text" placeholder="Make" required
+                                                            maxlength="100" formControlName="vehicleMake"
+                                                            [matAutocomplete]="autoMakes" (focusout)="onMakeFocusOut($event)" /><br />
+                                                        <mat-autocomplete #autoMakes="matAutocomplete">
+                                                            <mat-option *ngFor="let make of filteredMakes | async" [value]="make.Make_Name">{{make.Make_Name}}</mat-option>
+                                                        </mat-autocomplete>
+                                                        <mat-error>
+                                                            Make is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="col-4 md-3">
+                                                        <input matInput type="text" placeholder="Model" required
+                                                            maxlength="50" formControlName="vehicleModel" [matAutocomplete]="autoModels" (focusout)="onModelFocusOut($event)" /><br />
+                                                        <mat-autocomplete #autoModels="matAutocomplete">
+                                                            <mat-option *ngFor="let make of filteredModels | async" [value]="make.Model_Name">{{make.Model_Name}}</mat-option>
+                                                        </mat-autocomplete>
+                                                        <mat-error>
+                                                            Model is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="col-4 md-3">
+                                                        <input matInput type="text" placeholder="Color" required
+                                                            maxlength="50" formControlName="color" /><br />
+                                                        <mat-error>
+                                                            Model is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <div class="col-4 md-3">
+                                                        <span class="mr-2">Default</span>
+                                                        <mat-slide-toggle (click)="setDefault()"></mat-slide-toggle>
+
+                                                    </div>
+                                                    <div class="col d-flex align-items-center justify-content-end">
+                                                        <input style="max-width: 100px;" type="button"
+                                                            class="btn btn-pw my-0" title="Add Vehicle Plate"
+                                                            (click)="savevehicle()" [disabled]="vehicleForm.invalid"
+                                                            value="Add" />
+                                                        <input type="button" class="btn btn-remove"
+                                                            title="Add Vehicle Plate" (click)="toggle()"
+                                                            value="Cancel" />
+                                                    </div>
+                                                    <div class="text-danger text-center">
+                                                        {{httperror}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3" *ngIf="vehicledetails">
+                                                <table class="table w-100 table-borderless" style="overflow-x:scroll ;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Vehicle Number</th>
+                                                            <th scope="col">Vehicle Make</th>
+                                                            <th scope="col">Vehicle Model</th>
+                                                            <th scope="col">Color</th>
+                                                            <th scope="col">Default</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let vehicle of vehicledetails;let i = index">
+                                                            <td> <u><a class="btn-link text-dark font-weight-bold">{{vehicle.licensePlateNumber}}
+                                                                    </a></u>
+                                                            </td>
+                                                            <td>{{vehicle.make}}</td>
+                                                            <td>{{vehicle.model}}</td>
+                                                            <td>{{vehicle.color}}</td>
+                                                            <td>
+                                                                <mat-slide-toggle [checked]="vehicle.isDefault"
+                                                                    [disabled]="disabledDefault"
+                                                                    (click)="saveSetDefault(vehicle)">
+
+                                                                </mat-slide-toggle>
+                                                            </td>
+                                                            <td>
+                                                                <span (click)="editVehiclePlate(vehicle)"
+                                                                    style="font-size: 17px;cursor: pointer;"
+                                                                    class="material-icons text-primary">create</span>
+                                                                <span (click)="deleteVehiclePlate(vehicle.id)"
+                                                                    style="font-size: 17px;cursor: pointer;"
+                                                                    class="material-icons ml-2 text-danger">delete</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+<app-footer></app-footer>

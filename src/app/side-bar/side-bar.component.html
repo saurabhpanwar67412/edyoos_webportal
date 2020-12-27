@@ -1,0 +1,49 @@
+<div class="dashboard-minwidth h-100 border-right border-color-blue mt-2 d-lg-block d-none" [ngClass]="{
+  'dashboard-maxwidth': isOpen
+}">
+  <ul class="d-flex flex-column">
+    <!-- <a (click)="route('/user/dashboard/home')" class="mt-3 d-flex flex-nowrap menu-list align-items-center py-2 pl-4"
+      [ngClass]="{ 'pl-4': !isOpen, 'pl-3': isOpen, 
+      'active-item': isSelected('home') }">
+      <span style="width: 23px;" class="material-icons">
+        home
+      </span>
+      <span class="pl-4" [ngClass]="{ 'pl-1 ml-2': !isOpen, 'pl-3 ': isOpen }">Dashboad</span>
+    </a> -->
+    <a (click)="route('/user/dashboard/myorders')" class="mt-3 d-flex text-dark  
+       flex-nowrap menu-list align-items-center pl-4 py-2"
+      [ngClass]="{ 'pl-4': !isOpen, 'pl-3': isOpen, 'active-item': isSelected(DASHBOARD_TABS_METADATA.myorders) }">
+      <!-- <img style="width: 23px;" src="./assets/images/dashboard.svg"> -->
+      <span style="width: 23px;" class="material-icons">
+        list_alt
+      </span>
+      <span class="pl-4" [ngClass]="{ 'pl-1 ml-3': !isOpen, 'pl-3 ml-0 ': isOpen }"> Orders</span>
+    </a>
+    <li (click)="route('/user/dashboard/payment')"
+      class="mt-1 d-flex text-dark flex-nowrap menu-list align-items-center py-2 pl-4"
+      [ngClass]="{ 'pl-4': !isOpen, 'pl-3': isOpen, 'active-item': isSelected(DASHBOARD_TABS_METADATA.payment) }">
+      <!-- <img style="width: 23px;" src="./assets/images/dashboard.svg"> -->
+      <span style="width: 23px;" class="material-icons">
+        payment
+      </span>
+      <span class=" pl-4" [ngClass]="{ 'pl-1 ml-2': !isOpen, 'pl-3 ': isOpen }">Payment</span>
+    </li>
+    <li (click)="route('/profile')" class="mt-1 d-flex text-dark flex-nowrap menu-list align-items-center py-2 pl-4"
+      [ngClass]="{ 'pl-4': !isOpen, 'pl-3': isOpen,'active-item': isSelected('/profile') }">
+      <!-- <img style="width: 23px;" src="./assets/images/dashboard.svg"> -->
+      <span style="width: 23px;" class="material-icons">
+        account_circle
+      </span>
+      <span class="pl-4" [ngClass]="{ 'pl-1 ml-2': !isOpen, 'pl-3 ': isOpen }">Profile</span>
+    </li>
+    <!-- <li class="mt-3">
+          <img style="width: 30px;" src="./assets/images/online-shopping.svg">
+      </li>
+      <li class="mt-3">
+          <img style="width: 25px;" src="./assets/images/credit-card-svg.svg">
+      </li>
+      <li class="mt-3">
+          <img style="width: 30px;" src="./assets/images/settings.svg">
+      </li> -->
+  </ul>
+</div>

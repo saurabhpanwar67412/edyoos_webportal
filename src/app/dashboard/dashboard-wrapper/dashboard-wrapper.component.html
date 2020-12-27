@@ -1,0 +1,31 @@
+<app-nav-bar></app-nav-bar>
+<mat-drawer-container class="example-container" style="overflow-x: scroll;">
+  <mat-drawer #drawer class="bg-light" style="min-width: 230px; position: fixed;" mode="over">
+    <app-dashboard></app-dashboard>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="row no-gutters pt-5" style="height: 100%;min-height: 100%;">
+      <app-side-bar [isOpen]="isOpen"></app-side-bar>
+      <div class="col">
+        <!--  (click)="drawer.toggle()" -->
+        <div class="pt-3">
+          <button type="button" class="d-lg-block d-none text-primary font-weight-bolder" mat-button
+            (click)="isOpen = !isOpen">
+            <i aria-hidden="true" class="fa fa-bars"></i>
+          </button>
+          <button type="button" class="d-lg-none text-primary font-weight-bolder" mat-button (click)="drawer.toggle()">
+            <i aria-hidden="true" class="fa fa-bars"></i>
+          </button>
+        </div>
+        <div>
+          <div class="">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<div style="position: absolute;width: 100%;bottom: 0;">
+  <app-footer></app-footer>
+</div>

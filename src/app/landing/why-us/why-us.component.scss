@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
+
+
+.font-futura{
+  font-family: 'Futura', Arial, sans-serif;
+}
+.pg-container {
+  //background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(241,244,251,1) 100%);
+}
+
+.container-us {
+  padding-top: 20px;
+  width: 100%;
+}
+
+.packages-eus {
+  margin: 20px;
+  height: 100%;
+  font-size: 20px;
+  background-color: #3489eb;
+  box-shadow: 0 5px 10px #3489eb, 0 4px 3px #3489eb21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 30px;
+  flex-wrap: wrap;
+  color: #f4f4f4;
+}
+
+.packages-us {
+  margin: 20px;
+  width: 250px;
+  height: 100%;
+  background-color: #3489eb;
+  box-shadow: 0 5px 10px #3489eb, 0 4px 3px #3489eb21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 30px;
+  flex-wrap: wrap;
+  color: #f4f4f4;
+}
+
+.packages-us p {
+  font-size: 20px;
+  list-style: none;
+  padding-inline-start: 0;
+  padding: 10px;
+  color: #f4f4f4;
+}
+.packages-us img {
+  height: 90px;
+}
+.packages-table {
+  margin: 20px;
+  height: 100%;
+  background-color: #3489eb;
+  box-shadow: 0 5px 10px #3489eb, 0 4px 3px #3489eb21;
+  border-radius: 30px;
+  color: #f4f4f4;
+}
+.packages-table table {
+  width: 50%;
+  font-size: 20px;
+  float: left;
+}
+
+.table-border {
+  border-left: 1px solid #ffffff;
+}
+@media only screen and (max-width: 411px) {
+  .table-border {
+    border-left: none;
+  }
+}
+.table-mark {
+  font-size: 1.5em;
+}
+
+.icon-2x {
+  font-size: 3rem;
+}
+
+.icon-color{
+  color: #070d3b ;
+}
+.icon-3x {
+  font-size: 3.7rem;
+}
+.icon-4x {
+  font-size: 7rem;
+}
+.icon-5x {
+  font-size: 11rem;
+}
+.icon-6x {
+  font-size: 12rem;
+}
+.heading-1{
+  font-size: 34px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.bg-blue {
+  background-color: #e2eaf7;
+}
+.hw-wrapper{
+  position: relative;
+  min-height: 600px;
+  margin-bottom: 250px;
+}
+.how-works {
+  font-family: 'Poppins', sans-serif;
+  padding:0 0 0 35px;
+  // position: absolute;
+  // top: 175px;
+  // left: 25%;
+  // width: 90%;
+  // transform: translate(-22%, 55%);
+}
+.material-icons {
+  &:hover {
+    color: #062a78;
+  }
+}
+.container-us{
+  position: absolute;
+  top: -17px;
+  box-shadow: none;
+}
+.btn-search {
+  background-color: rgba(76, 218, 100) !important;
+  color: #f4f4f4;
+  &:hover{
+    background-color: rgb(0, 0, 0) !important;
+    color: #f4f4f4 !important;
+      outline: none !important;
+      border: none !important;
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;  }
+  
+}
+
+.imgae-test{
+  
+  // box-shadow: inset 2000px 0 0 0 rgba(0, 125, 255, 0.5);
+  // border-color: rgba(0, 125, 255, 1);
+}
+  
+
+  iframe{
+    width: 560px;
+    height: 310px;
+  }
+  @media only screen and (max-width: 1200px) {
+    .img-custom{
+      width: 300px !important;
+      height: 200px !important;
+    }
+  }
+
+  .mobile-img {
+    width: 507px;
+    height: 379px;
+    object-fit: cover; 
+  }
+  @media (max-width: 1399.98px) { 
+    .mobile-img{
+      width: 507px;
+    height: 240px;
+    object-fit: initial !important;
+    }
+    
+   }
+  
+ 
+  @media (max-width: 991.98px) { 
+    .mobile-img{
+      width: 507px;
+    height: 300px;
+    object-fit: initial !important;
+    }
+    
+   }
+   @media (max-width: 768.98px) {
+    iframe{
+      width: 100%;
+      height: 310px;
+    }
+  }
+  .icon-howed {
+    width: 56px;
+    float: left;
+    height: 56px;
+    margin: 0 15px 0 0;
+}
+.icon-how-location {
+  background: url(../../../assets/images/how-pointer.png) no-repeat;
+}
+.icon-how-clock {
+  background: url(../../../assets/images/how-clock.png) no-repeat;
+}
+.icon-how-car {
+  background: url(../../../assets/images/how-car.png) no-repeat;
+}
+.mob-app-container {
+  margin: 0 auto;
+  max-width: 980px;
+}
+.find-spot-cms {
+  text-align: center;
+}
+.find-spot-cms li {
+  display: inline-block;
+  padding: 0 27px;
+}
+.find-spot-cms.find-spot-cms-4 li {
+  padding: 0 10px;
+}
+

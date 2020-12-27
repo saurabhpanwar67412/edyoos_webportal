@@ -1,0 +1,158 @@
+<section class="sign-up-page-wrapper">
+    <app-nav-bar-new></app-nav-bar-new>
+    <div class="container py-5">
+        <div class="row no-gutters">
+            <div class="col-12 col-md-7 mx-auto px-md-5 bg-light" style="border-radius: 20px;">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-card">
+                        <div class="form-card-grid">
+                            <h1 class="h1 font-weight-bold text-center py-2" style="font-size: 30px;">Sign Up
+                            </h1>
+                            <div class="form-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 mb-4 mb-sm-4">
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="text"
+                                                placeholder="First Name" (blur)="logValidationErrors()" required
+                                                formControlName="firstName" (blur)="logValidationErrors()" />
+                                            <div *ngIf="formErrors.firstName" class="text-danger">
+                                                {{formErrors.firstName}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-sm-4 mb-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-lg"
+                                                placeholder="Last Name" formControlName="lastName" required
+                                                (blur)="logValidationErrors()" (blur)="logValidationErrors()" />
+                                            <div *ngIf="formErrors.lastName" class="text-danger">
+                                                {{formErrors.lastName}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-12 my-1">&nbsp;</div> -->
+
+                                    <div class="col-12 mb-4">
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="text"
+                                                placeholder="Email Address" formControlName="email" required
+                                                (blur)="logValidationErrors()" (blur)="logValidationErrors()" />
+                                            <div *ngIf="formErrors.email" class="text-danger">
+                                                {{formErrors.email}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 my-1">&nbsp;</div> -->
+
+                                    <div class="col-md-6 col-sm-12 mb-sm-4 mb-4" formGroupName="passwordGroup">
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="password"
+                                                placeholder="Password" formControlName="password" required
+                                                (blur)="logValidationErrors()" (blur)="logValidationErrors()" />
+
+                                            <div *ngIf="formErrors.password" class="text-danger">
+                                                {{formErrors.password}}
+                                            </div>
+                                        </div>
+                                    </div>                                   
+
+                                    <div class="col-md-6 col-sm-12 mb-sm-4 mb-4" formGroupName="passwordGroup">
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="password"
+                                                formControlName="passwordConfirmation" required
+                                                (blur)="logValidationErrors()" placeholder="Confirm Password" />
+                                            <div *ngIf="(formErrors.passwordConfirmation || formErrors.passwordGroup)"
+                                                class="text-danger">
+                                                {{formErrors.passwordConfirmation ? formErrors.passwordConfirmation
+                                        : formErrors.passwordGroup}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 my-1">&nbsp;</div> -->
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input type="checkbox" value="terms" (click)="marksAsTouched()"
+                                                formControlName="iAgree" id="signchekagree" class="mr-2 mb-2" />
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="signchekagree">I agree to
+                                                <a class="btn-link" (click)="openPrivacyNewWindow()"> Privacy Notice</a>
+                                                and
+                                                <a class="btn-link" (click)="openTermsNewWindow()">Terms & Conditions
+                                                </a>
+                                            </label>
+                                        </div>
+                                        <div class="col-12 text-danger" *ngIf="formErrors.iAgree">
+                                            {{formErrors.iAgree}}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="mr-2 mb-2"
+                                                formControlName="subscribeNewsLetter" value="subscribe"
+                                                id="rememberMe" />
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="rememberMe">Subscribe to newsletter</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-danger text-center">
+                                    {{httpError}}
+                                </div>
+
+                                <div class="form-group my-4">
+
+                                    <button class="btn" [disabled]="registerForm.invalid || submitBtnClicked">
+                                        <span class="spinner-border spinner-border-sm" *ngIf="submitBtnClicked"
+                                            role="status" aria-hidden="true"></span>
+                                        {{submitBtnClicked?'Loading...':'Sign Up'}}
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="social-img">
+                                <ul>
+                                    <li class="log-fb">
+                                        <a [routerLink]="" (click)="facebookLogin()"><i class="fa fa-facebook"></i></a>
+                                    </li>
+
+                                    <li class="log-gp">
+                                        <a [routerLink]="" (click)="googleLogin()">
+                                            <i class="fa fa-google"></i></a>
+                                    </li>
+                                    <li class="log-ap">
+                                        <a [routerLink]="" (click)="appleLogin()">
+                                            <i class="fa fa-apple"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group f14 fcorange text-center mt-4">
+                                <a style="cursor: pointer;" (click)="router.navigateByUrl('pages/login')">I already have
+                                    an
+                                    account</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

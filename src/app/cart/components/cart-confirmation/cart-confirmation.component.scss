@@ -1,0 +1,383 @@
+.font-courgette{
+    text-align: center;
+}
+.font-courgette p{
+    font-family: "Courgette", cursive;
+font-size: 4rem;
+color: #4fc059;
+margin: 6rem;
+font-weight: bold;
+border: 1rem solid #4fc059;
+border-radius: 10rem;
+transition:1.5s ;
+}
+.font-courgette p:hover{
+    border: 1rem solid #000000;
+    background-color: #4fc059;
+    color: #000000;
+    transition:1.5s ;
+}
+
+.position-bottom{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+.color-violet {
+    color: #4919db !important;
+}
+
+.color-orange {
+    color: #ff6868 !important;
+}
+
+header {
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    right: 24px;
+    bottom: 26px;
+}
+
+/* body{
+    font-family: 'Roboto', sans-serif;
+} */
+
+.header-border {
+    clip-path: polygon(20% 0%, 100% 0, 100% 20%, 100% 80%, 69% 100%, 20% 100%, 0 100%, 0 0);
+}
+.display-5 {
+    font-weight: bold;
+    font-size: 35px;
+}
+.con-width{
+width: 85%
+;}
+.main-head{
+   font-size: 30px; 
+}
+@media (max-width: 767.98px) {
+    .con-width{
+        width: 100%
+        ;}
+}
+
+.order-con-dv{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: #ffffff;
+    margin: 25px 0;
+    padding: 35px;
+}
+@media only screen and (max-width: 479px) 
+{
+    .order-con-dv {
+        padding: 15px !important;
+    }
+    .mob-text-left {
+        text-align: left !important;
+    }
+    .main-head {
+        max-width: 75%;
+        font-size: 14px !important;
+    }
+    
+    header h4 {
+        font-size: 10px !important;
+    }
+    
+    .logo img {
+        max-width: 50px !important;
+    }
+    
+    .logo {
+        top: 20px;
+        right: 20px !important;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) 
+{
+    .order-con-dv {
+        padding: 15px !important;
+    }
+    .mob-text-left {
+        text-align: left !important;
+    }
+    .main-head {
+        max-width: 75%;
+        font-size: 14px !important;
+    }
+    
+    header h4 {
+        font-size: 10px !important;
+    }
+    
+    .logo img {
+        max-width: 50px !important;
+    }
+    
+    .logo {
+        top: 20px;
+        right: 20px !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .order-con-dv {
+        padding: 15px !important;
+    }
+    .mob-text-left {
+        text-align: left !important;
+    }
+    .main-head {
+        max-width: 75%;
+        font-size: 14px !important;
+    }
+    
+    header h4 {
+        font-size: 10px !important;
+    }
+    
+    .logo img {
+        max-width: 50px !important;
+    }
+    
+    .logo {
+        top: 20px;
+        right: 20px !important;
+    }
+
+}	
+
+.order-con-container {
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #dee1ed;
+    border-radius: 5px;
+    font-family: MalloryMedium;
+    margin: 25px 0;
+	color: #2a3135;
+}
+
+.order-conpghdr {
+    color: #1e82e8;
+    font-size: 30px;
+    padding: 45px 0;
+    text-align: center;
+}
+.orcon-logo {
+    float: right;
+}
+.orcon-wnt {
+    float: left;
+}
+.orcon-nlg {
+    padding: 0 30px;
+}
+.orcon-wnt label {
+    display: block;
+	color: #2a3135;
+}
+
+.orcon-wntlbl1 {
+    font-size: 20px;
+    margin: 0 0 15px;
+}
+.orcon-wntlbl2 {
+    font-size: 14px;
+}
+
+.orcon-dlist {
+    background: none repeat scroll 0 0 #f0f7ff;
+    margin: 10px 0;
+    padding: 15px 30px;
+}
+.orcon-dlist li {
+    display: inline-block;
+}
+.orcon-lbl {
+    color: #6f7a80;
+    font-size: 14px;
+    margin: 0 5px 0 0;
+}
+.fl100.orcon-dlist li:last-child {
+    float: right;
+}
+.orcon-bfig {
+    color: #2a3135;
+    font-size: 18px;
+}
+
+.orcon-bkinfo {
+    padding: 0 30px;
+}
+.orcon-bkinfohdr {
+    font-family: MalloryBold;
+    font-size: 20px;
+    margin: 0 0 20px;
+}
+.orcon-bkimg {
+    float: left;
+    width: 30%;
+}
+.orcon-bkimg img {
+    border-radius: 5px;
+    height: 150px;
+    width: 100%;
+}
+.orcon-bkinfodesc {
+    float: left;
+    padding: 0 0 0 15px;
+    width: 70%;
+}
+.orcon-bkinfoname {
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+.orcon-bkinfoadrs {
+    background: url("../../../../assets/images/bkico-marker.png") no-repeat scroll 1px 3px rgba(0, 0, 0, 0);
+    color: #8b97a0;
+    font-family: MalloryBook;
+    font-size: 14px;
+    padding: 0 0 0 20px;
+    float: left;
+    width: 70%;
+}
+.orcon-bkqr {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+.orcon-bktime li {
+    display: inline-block;
+}
+
+.orcon-bktimelbl {
+    display: block;
+}
+.orcon-bktime li:last-child {
+    float: right;
+}
+.orcon-bktime {
+    margin: 20px 0 0;
+    float: left;
+    width: 100%;
+}
+.orcon-bktimelbl {
+    color: #7d858a;
+    font-family: MalloryBook;
+    font-size: 13px;
+    margin: 0 0 5px;
+}
+.orcon-bktimefig {
+    font-size: 16px;
+}
+.orcon-fsum {
+    margin: 25px 0 0;
+    padding: 0 30px;
+}
+.orcon-fsumhdr {
+    border-bottom: 1px solid #e3e7ee;
+    font-family: MalloryBold;
+    font-size: 20px;
+    margin: 0 0 20px;
+}
+.orcon-fsumlist {
+    color: #545c61;
+    float: right;
+}
+
+.orcon-fsumlbl {
+    font-family: MalloryBook;
+}
+.orcon-fsumcurr {
+    margin: 0 20px;
+}
+
+.orcon-fsumlist li {
+    padding: 10px 0;
+    text-align: right;
+}
+.orcon-fsumttl {
+    border-top: 1px solid #e3e7ee;
+    color: #333b40;
+    font-family: MalloryBold;
+}
+
+.orcon-qury {
+    color: #6f797f;
+    font-family: MalloryBook;
+    font-size: 15px;
+    padding: 15px 30px;
+    text-align: center;
+}
+
+.orcon-fsuminfo {
+    border-bottom: 1px solid #e3e7ee;
+}
+.orcon-qrcode {
+    float: left;
+}
+.orcon-sprice {
+    float: right;
+    color: #545c61;
+}
+.orconreplist{
+    padding: 0 0 10px;
+}
+@media only screen and (max-width: 479px) 
+{
+    .orcon-bkinfoadrs{
+        width: 100%;
+    }
+    .orcon-bkqr{
+        width: 100%;
+        text-align: left;
+    }
+    .fl100.order-conpghdr {
+        padding: 15px;
+        font-size: 18px;
+    }
+    
+    .orcon-logo {
+        display: none;
+    }
+    
+    label.orcon-wntlbl1 {
+        font-size: 16px !important;
+    }
+    
+    label.orcon-wntlbl2 {
+        font-size: 12px !important;
+    }
+    
+    label.orcon-lbl {
+        display: block;
+    }
+    
+    .fl100.orcon-dlist li:last-child {
+        float: left !important;
+    }
+    
+    .orcon-bkimg {
+        width: 100% !important;
+        margin: 0 0 15px;
+    }
+    
+    .orcon-bkinfodesc {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    .orcon-bktime li:last-child {
+        float: left  !important;
+    }
+    
+    span.orcon-fsumcurr {
+        margin: 0 7px !important;
+    }
+    
+    label.orcon-fsumlbl {
+        float: left;
+        font-size: 12px;
+    }
+}
