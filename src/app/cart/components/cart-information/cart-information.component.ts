@@ -439,6 +439,7 @@ this.registerForm = this.fb.group({
   }
   loginclick(value,index)
   {
+    debugger;
     this.selectedTabIndex=index;
     this.modalService.open(value, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

@@ -123,6 +123,7 @@ export class CartCheckoutComponent implements OnInit {
 
 
   getDataFromQueryParams() {
+    debugger; 
     this.route.paramMap.subscribe((params) => {
       if (params.get('refresh')) {
 
@@ -288,6 +289,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   onMakeFocusOut(event: any) {
+    debugger; 
     let typedMake = this.paymentForm.controls.vehicleInfo.get('vehicleMake').value.toLowerCase();
     var selectedMake = this.makes.filter(x => x.Make_Name.toLowerCase() === typedMake);
     if (selectedMake.length > 0) {
@@ -309,6 +311,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   onModelFocusOut(event: any) {
+    debugger; 
     let typedModel = this.paymentForm.controls.vehicleInfo.get('vehicleModel').value.toLowerCase();
     var selectedModel = this.models.filter(x => x.Model_Name.toLowerCase() === typedModel);
     if (selectedModel.length > 0) {
@@ -317,6 +320,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   getModels(makeName) {
+    debugger; 
     var selectedMake = this.makes.filter(x => x.Make_Name === makeName)[0];
     this.selectedMakeName = selectedMake.Make_Name;
     this.commonService.getAllModelsByMake(selectedMake.Make_ID).subscribe(
@@ -397,6 +401,7 @@ export class CartCheckoutComponent implements OnInit {
     this.hasCards = false;
   }
   nextStep() {
+    debugger; 
     this.guestUserEmail = this.paymentForm.get('email').value;
     this.buttonclicked = true;
     this.guestBtnClick = false;
@@ -422,6 +427,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   AddNewCardInstead() {
+    debugger; 
     this.paymentForm.get(CART_CHECKOUT_METADATA.cardName).setValidators(Validators.required);
     this.paymentForm.updateValueAndValidity();
     // this.paymentForm.addControl(CART_CHECKOUT_METADATA.cardName, new FormControl('', Validators.required));
@@ -442,7 +448,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   addVehicleInfo() {
-
+    debugger; 
     this.paymentForm.addControl(CART_CHECKOUT_METADATA.vehicleInfo, this.createVehicleForms());
     this.paymentForm.get(CART_CHECKOUT_METADATA.vehicleId).clearValidators();
     this.paymentForm.get(CART_CHECKOUT_METADATA.vehicleId).updateValueAndValidity();
@@ -502,6 +508,7 @@ export class CartCheckoutComponent implements OnInit {
 
 
   getVehicleDetails() {
+    debugger; 
 
     this.userService.getVehicleDetails(this.authenticationService.userValue.id).subscribe((response) => {
       if (response.data != null && response.data.length > 0) {
@@ -575,6 +582,7 @@ export class CartCheckoutComponent implements OnInit {
   checkOutBtnClicked: boolean = false;
 
   checkout() {
+    debugger; 
 
     var notAvailableSpots = this.placesService.cartPropertyGroup.filter(s => s.isSpotAvaliable == false);
 
@@ -594,11 +602,13 @@ export class CartCheckoutComponent implements OnInit {
 
 
   backToUser() {
+    debugger; 
 
     this.next.emit({ formType: undefined, previous: true });
   }
 
   chargeCustomer() {
+    debugger; 
     this.checkOutBtnClicked = true;
     this.loaderService.isLoading.next(true);
 
@@ -697,6 +707,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   getPublishableKey() {
+    debugger; 
     this.paymentService.getPublishableKey()
       .subscribe((response) => {
         this.stripe = Stripe(response.data.publishableKey);
@@ -756,6 +767,7 @@ export class CartCheckoutComponent implements OnInit {
   clientSecret: string;
 
   GetPaymentMethodsById() {
+    debugger; 
     this.paymentService.GetPaymentMethodsById()
       .subscribe((response) => {
         this.cards = response.data;
@@ -784,6 +796,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   chargeCustomerByPaymentId(chargeCustomer: ChargeCustomer) {
+    debugger; 
     this.paymentService.chargeCustomerByPaymentId(chargeCustomer)
       .subscribe((response) => {
         console.log(response.data);
@@ -824,6 +837,7 @@ export class CartCheckoutComponent implements OnInit {
 
 
   cancelPromoCode() {
+    debugger; 
 
     this.placesService.cartPropertyGroup.forEach((place, index) => {
 
@@ -843,6 +857,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   getTotalAmount(): number {
+    debugger; 
 
     let total = 0;
     this.placesService.cartPropertyGroup.forEach((place) => {
@@ -870,6 +885,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   feeAmountCalculate(extraFees: any[], groupCheckOutAmount: number) {
+    debugger; 
     let extraAmount: number = 0;
     extraFees.forEach((value, index) => {
       if (value.feeType == FeeType.Percent) {
@@ -886,6 +902,7 @@ export class CartCheckoutComponent implements OnInit {
 
   public email: string;
   createPaymentIntent() {
+    debugger; 
     if (this.authenticationService.isAuthorized()) {
       this.email = this.authenticationService.userValue.email;
     }
@@ -913,7 +930,7 @@ export class CartCheckoutComponent implements OnInit {
 
 
   payWithCard(stripe, card, clientSecret, customerId) {
-
+debugger; 
     let cardName = this.paymentForm.get(CART_CHECKOUT_METADATA.cardName).value;
 
     stripe
@@ -948,6 +965,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   saveCardDetails(paymentMethodId) {
+    debugger;
     let userDetails = this.authenticationService.userValue;
 
     let attachPaymentRequest = new AttachPaymentRequest();
@@ -980,7 +998,7 @@ export class CartCheckoutComponent implements OnInit {
   promoCode: string;
 
   getPromoCodeDiscountPercent(promocode: string) {
-
+debugger;
     this.inValidPromoCodeMessage = null;
     // this.promoCode = promocode;
     this.promocodeService.getPromoCodeDiscountPercent(promocode).subscribe((response) => {
@@ -1033,6 +1051,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   checkPromocodeIsThere(propertyGroupID: string, discountedPrice: number): boolean {
+    debugger;
     let arrayPropertyGroupId = propertyGroupID.split(',');
     let ischeck = false;
     this.placesService.cartPropertyGroup.forEach((value, index) => {
@@ -1053,6 +1072,7 @@ export class CartCheckoutComponent implements OnInit {
   }
 
   orderComplete(paymentIntent, customerId) {
+    debugger;
     //reserve now google Add
     window.gtag_report_conversion(window.location.href);
 
